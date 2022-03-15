@@ -1,0 +1,15 @@
+{
+  "dictionaries": ["vim", "nvim_plugin"],
+  "dictionaryDefinitions": [
+    {
+      "name": "vim",
+      "path": "./.cspell/vim.txt",
+      "addWords": true
+    },
+    {
+      "name": "nvim_plugin",
+      "path": "./.cspell/nvim_plugin.txt",
+      "addWords": true
+    }
+  ]
+}

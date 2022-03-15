@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+if [[ -f /usr/bin/brave ]]; then
+    brave --app=$@
+fi
