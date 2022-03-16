@@ -17,3 +17,4 @@ install:
 	ln -sf ~/dotfiles/.config/pulseaudio-ctl/ ~/.config
 	ln -sf ~/dotfiles/.config/polybar/ ~/.config
 	ln -sf ~/dotfiles/.config/i3status/ ~/.config
+	ln -sf ~/dotfiles/.config/picom.conf ~/.config
