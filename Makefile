@@ -3,6 +3,8 @@ install:
 	ln -sf ~/dotfiles/.profile ~/.profile
 	ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
 	ln -sf ~/dotfiles/.Xresources ~/.Xresources
+	ln -sf ~/dotfiles/.dmenurc ~/.dmenurc
+	ln -sf ~/dotfiles/.dir_colors ~/.dir_colors
 	mkdir -p ~/.local/bin/
 	chmod +x ~/dotfiles/script/brave-popup
 	ln -sf ~/dotfiles/script/brave-popup ~/.local/bin/
@@ -12,3 +14,6 @@ install:
 	ln -sf ~/dotfiles/.config/dunst/ ~/.config
 	ln -sf ~/dotfiles/.config/kitty/ ~/.config
 	ln -sf ~/dotfiles/.config/ranger/ ~/.config
+	ln -sf ~/dotfiles/.config/pulseaudio-ctl/ ~/.config
+	ln -sf ~/dotfiles/.config/polybar/ ~/.config
+	ln -sf ~/dotfiles/.config/i3status/ ~/.config

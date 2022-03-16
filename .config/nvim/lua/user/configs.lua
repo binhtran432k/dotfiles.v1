@@ -20,8 +20,8 @@ function M.setup()
     -- (( Cursor shape ))
     -- guicursor = 'n-c:block,i-ci-ve:ver40,r-cr-v:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175',
     -- guicursor = 'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
-    guicursor = 'n-c:block',
-    guifont = 'Delugia',
+    -- guicursor = 'n-c:block',
+    -- guifont = 'Delugia',
     -- (( Mouse selection ))
     mouse = 'a',
     -- (( Indent ))

@@ -6,55 +6,75 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-XTerm*background:        #222D31
-XTerm*foreground:        #d8d8d8
-XTerm*pointerColor:      #1ABB9B
+XTerm*background:        #282A36
+XTerm*foreground:        #F8F8F2
+XTerm*pointerColor:      #8be9fd
 XTerm*faceName:          Fixed
 XTerm*faceSize:          11
 XTerm*reverseVideo:      on
 XTerm*selectToClipboard: true
 
-*background:                      #222D31
-*foreground:                      #d8d8d8
+! Dracula Xresources palette
+! *.foreground: #F8F8F2
+! *.background: #282A36
+! *.color0:     #000000
+! *.color8:     #4D4D4D
+! *.color1:     #FF5555
+! *.color9:     #FF6E67
+! *.color2:     #50FA7B
+! *.color10:    #5AF78E
+! *.color3:     #F1FA8C
+! *.color11:    #F4F99D
+! *.color4:     #BD93F9
+! *.color12:    #CAA9FA
+! *.color5:     #FF79C6
+! *.color13:    #FF92D0
+! *.color6:     #8BE9FD
+! *.color14:    #9AEDFE
+! *.color7:     #BFBFBF
+! *.color15:    #E6E6E6
+
+*background:                      #282A36
+*foreground:                      #F8F8F2
 *fading:                          8
 *fadeColor:                       black
-*cursorColor:                     #1ABB9B
-*pointerColorBackground:          #2B2C2B
-*pointerColorForeground:          #16A085
+*cursorColor:                     #8be9fd
+*pointerColorBackground:          #44475a
+*pointerColorForeground:          #f8f8f2
 
 !! black dark/light
-*color0:                          #222D31
-*color8:                          #585858
+*.color0:     			  #000000
+*.color8:     			  #4D4D4D
 
 !! red dark/light
-*color1:                          #ab4642
-*color9:                          #ab4642
+*.color1:     			  #FF5555
+*.color9:     			  #FF6E67
 
 !! green dark/light
-*color2:                          #7E807E
-*color10:                         #8D8F8D
+*.color2:     			  #50FA7B
+*.color10:    			  #5AF78E
 
 !! yellow dark/light
-*color3:                          #f7ca88
-*color11:                         #f7ca88
+*.color3:     			  #F1FA8C
+*.color11:   			  #F4F99D
 
 !! blue dark/light
-*color4:                          #7cafc2
-*color12:                         #7cafc2
+*.color4:     			  #BD93F9
+*.color12:    			  #CAA9FA
 
 !! magenta dark/light
-*color5:                          #ba8baf
-*color13:                         #ba8baf
+*.color5:     			  #FF79C6
+*.color13:      		  #FF92D0
 
 !! cyan dark/light
-*color6:                          #1ABB9B
-*color14:                         #1ABB9B
+*.color6:     			  #8BE9FD
+*.color14:    			  #9AEDFE
 
 !! white dark/light
-*color7:                          #d8d8d8
-*color15:                         #f8f8f8
+*.color7:     			  #BFBFBF
+*.color15:    			  #E6E6E6
 
-Xcursor.theme: xcursor-breeze
+Xcursor.theme: capitaine-cursors-light
 Xcursor.size:                     0
 
 URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
@@ -65,7 +85,7 @@ URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
 !! terminus names see end of file!
 
 URxvt.depth:                      32
-URxvt.background:                 [100]#222D31
+URxvt.background:                 [100]#282a36
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true
