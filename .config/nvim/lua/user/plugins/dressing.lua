@@ -18,8 +18,7 @@ function M.setup()
     return
   end
 
-  local dressing = require('dressing')
-  dressing.setup({
+  require('dressing').setup({
     input = {
       -- Set to false to disable the vim.ui.input implementation
       enabled = true,
@@ -66,10 +65,7 @@ function M.setup()
       backend = { 'telescope', 'fzf_lua', 'fzf', 'builtin', 'nui' },
 
       -- Options for telescope selector
-      telescope = {
-        -- can be 'dropdown', 'cursor', or 'ivy'
-        theme = 'dropdown',
-      },
+      telescope = nil,
 
       -- Options for fzf selector
       fzf = {

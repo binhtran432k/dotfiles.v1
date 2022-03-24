@@ -31,9 +31,7 @@ function M.setup()
     return
   end
 
-  ---@diagnostic disable-next-line: different-requires
-  local telescope = require('telescope')
-  telescope.setup({
+  require('telescope').setup({
     defaults = {
       path_display = { 'smart' },
       mappings = {
