@@ -30,14 +30,6 @@ function M.setup()
     shiftwidth = 4,
     expandtab = true,
     smarttab = true,
-    -- (( Fold indent ))
-    -- foldmethod = 'indent',
-    foldlevelstart = 99,
-    -- fillchars = 'fold: ',
-    -- foldlevel = 99,
-    foldmethod = 'expr',
-    foldexpr = 'nvim_treesitter#foldexpr()',
-    -- foldtext = [[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']],
     -- (( Increment priority ))
     nrformats = { 'alpha', 'bin', 'hex' },
     -- (( Line number ))
@@ -103,12 +95,20 @@ function M.setup()
 
   -- Save last cursor position and folding
   vim.opt.viewoptions:remove('options')
+  -- vim.cmd([[
+  -- augroup remember_folds
+  --   autocmd!
+  --   autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
+  --   autocmd BufWritePost *.* if &ft !=# 'help' | mkview | endif
+  --   autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
+  -- augroup END
+  -- ]])
   vim.cmd([[
-  augroup remember_folds
-    autocmd!
-    autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
-    autocmd BufWritePost *.* if &ft !=# 'help' | mkview | endif
-    autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
+  augroup remember_last_jump
+    autocmd BufRead * autocmd FileType <buffer> ++once
+      \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
+    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+          \ | wincmd p | diffthis
   augroup END
   ]])
 
@@ -139,8 +139,13 @@ function M.setup()
   M.load_filetype_setups()
 
   vim.cmd([[
-  autocmd BufEnter * lua require("user.configs").load_filetype_setups()
+  autocmd FileType * lua require("user.configs").load_filetype_setups()
+  autocmd FileType * lua require('user.plugins.treesitter_handler').assign_fold()
   ]])
+
+  vim.g.did_load_filetypes = 1
+  vim.cmd([[ runtime! ftdetect/*.vim]])
+  vim.cmd([[runtime! ftdetect/*.lua]])
 end
 
 function M.setup_builtin()

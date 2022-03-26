@@ -1,4 +1,4 @@
-local indent_o_matic = require('user.plugins.indent-o-matic')
+local indent_o_matic = require('user.plugins.indent-o-matic_handler')
 
 local M = {}
 
@@ -59,6 +59,7 @@ end
 
 function M.refresh()
   vim.cmd([[redraw!]])
+  vim.cmd([[colorscheme dracula]])
   vim.cmd([[nohlsearch]])
   if indent_o_matic.is_init then
     vim.cmd([[IndentOMatic]])
@@ -107,10 +108,6 @@ function M.load_lazy_keys()
   for _, plugin in ipairs(plugins) do
     require(plugin).bind_keys()
   end
-end
-
-function M.register_lazy(plugin)
-  M.lazy_plugins[#M.lazy_plugins + 1] = plugin
 end
 
 return M

@@ -6,7 +6,7 @@ M.plugins = {
   'impatient',
   'filetype',
   -- (( Dependency lazy loading ))
-  'web-devicons',
+  'dependencies',
   -- (( Startup Screen ))
   'alpha',
   -- (( Git ))
@@ -93,7 +93,6 @@ function M.setup()
     use('mfussenegger/nvim-dap') -- Debug Adapter Protocol
     use('rcarriga/nvim-dap-ui')
     use('theHamsta/nvim-dap-virtual-text')
-    use('Pocco81/DAPInstall.nvim')
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -106,6 +105,7 @@ end
 function M.init_plugins(use, plugin_dir, plugins)
   for _, plugin in ipairs(plugins) do
     local plugin_name = plugin_dir .. '.' .. plugin
+    plugin_name = plugin_name .. '_handler'
     local plugin_fn = function(fn_name)
       return 'require("' .. plugin_name .. '").' .. fn_name .. '()'
     end
@@ -115,7 +115,7 @@ function M.init_plugins(use, plugin_dir, plugins)
         require('user.mappings').register_lazy(plugin_name)
       end
       if lazy_binds.which_key then
-        require('user.plugins.which-key').register_lazy(plugin_name)
+        require('user.plugins.which-key_handler').register_lazy(plugin_name)
       end
       if lazy_binds.filetype_setup then
         require(plugin_name).register_filetype_setup()
