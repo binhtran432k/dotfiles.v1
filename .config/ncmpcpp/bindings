@@ -1,0 +1,84 @@
+## Additional to the defaults in example file
+def_key "j"
+    scroll_down
+def_key "k"
+    scroll_up
+def_key "d"
+    page_down
+def_key "u"
+    page_up
+def_key "ctrl-f"
+    page_down
+def_key "ctrl-b"
+    page_up
+
+def_key "n"
+    next
+def_key "p"
+    dummy
+    previous
+def_key "backspace"
+    previous
+
+def_key "space"
+    pause
+
+def_key "left"
+    seek_backward
+def_key "right"
+    seek_forward
+
+def_key "H"
+    show_playlist
+def_key "L"
+    show_lyrics
+
+def_key "h"
+    jump_to_parent_directory
+def_key "h"
+    previous_column
+
+def_key "l"
+    enter_directory
+def_key "l"
+    play_item
+def_key "l"
+    next_column
+def_key "l"
+    run_action
+
+def_key "ctrl-a"
+    add_item_to_playlist
+
+def_key "J"
+    select_item
+def_key "K"
+    select_item
+
+def_key "ctrl-e"
+    move_end
+def_key "t"
+    move_home
+
+def_key "down"
+    scroll_down
+def_key "up"
+    scroll_up
+def_key "shift-up"
+    move_selected_items_up
+def_key "N"
+    move_sort_order_down
+
+def_key "shift-down"
+    move_selected_items_down
+def_key "F"
+    apply_filter
+def_key "*"
+    toggle_visualization_type
+
+def_key "C"
+    toggle_playing_song_centering
+def_key "+"
+    show_clock
+def_key "="
+    volume_up
