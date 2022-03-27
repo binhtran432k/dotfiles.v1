@@ -1,0 +1,107 @@
+[theme]
+name = "dracula"
+# [theme.overrides]
+# separator = "|"
+# separator_bg = "#282a36"
+# separator_fg = "#f8f8f2"
+[icons]
+name = "awesome"
+
+[[block]]
+block = "music"
+player = "vlc"
+smart_trim = true
+hide_when_empty = true
+buttons = ["play", "next"]
+
+[[block]]
+block = "music"
+player = "brave"
+smart_trim = true
+hide_when_empty = true
+buttons = ["play", "next"]
+
+[[block]]
+block = "music"
+player = "ncmpcpp"
+smart_trim = true
+hide_when_empty = true
+buttons = ["play", "next"]
+
+# [[block]]
+# block = "temperature"
+# collapsed = false
+# interval = 10
+# format = "{average:1}C"
+# interval = 1
+# chip = "*-isa-*"
+# inputs = ["CPUTIN", "SYSTIN"]
+
+[[block]]
+block = "net"
+# device = "wlp82s0"
+icons_format = " {icon}"
+format = "{speed_down}{speed_up}"
+interval = 1
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+interval = 20
+unit = "GB"
+format = "{icon} {available:1}"
+
+[[block]]
+block = "memory"
+format_mem = "{mem_used:1}/{mem_total:1}({mem_used_percents:1})"
+format_swap = "{swap_used:1}/{swap_total:1}({swap_used_percents:1})"
+display_type = "memory"
+icons = true
+clickable = true
+interval = 5
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "{utilization} {frequency}"
+on_click = "kitty --class floating -e btop"
+
+[[block]]
+block = "backlight"
+# device = "intel_backlight"
+icons_format = "{icon}"
+format = "{brightness:1}"
+invert_icons = true
+minimum = 15
+maximum = 100
+cycle = [100, 30, 0, 30]
+on_click = "xfce4-power-manager -c"
+
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
+full_format = " {percentage}"
+on_click = "xfce4-power-manager -c"
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+on_click = "pavucontrol"
+format = "{volume}"
+headphones_indicator = true
+
+[[block]]
+block = "time"
+interval = 60
+icons_format = ""
+on_click = "kitty --class floating --hold -e cal -S -n 5"
+# format = "%a %D/% %r"
+format = "\uf073 %a, %d %B \uf017 %H:%M"

@@ -26,7 +26,7 @@ order += "memory"
 order += "tztime local"
 
 cpu_usage {
-  format = " cpu  %usage "
+  format = " cpu %usage "
 }
 
 load {
@@ -47,7 +47,7 @@ ethernet _first_ {
 
 battery all {
   # format = "%status %percentage %remaining %emptytime"
-  format = " %status %percentage"
+  format = "%status %percentage"
   format_down = "No battery"
   last_full_capacity = true
   integer_battery_capacity = true
@@ -56,8 +56,8 @@ battery all {
   # status_bat = "bat"
   # status_bat = "☉"
   status_bat = ""
-  # status_unk = "?"
-  status_unk = ""
+  status_unk = "?"
+  # status_unk = ""
   # status_full = ""
   status_full = "☻"
   low_threshold = 15
