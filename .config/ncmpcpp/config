@@ -4,98 +4,110 @@ lyrics_directory  = "~/.config/cmpcpp/lyrics"
 ncmpcpp_directory  = "~/.config/cmpcpp"
 mpd_host = "localhost"
 mpd_port = "6600"
-# mpd_connection_timeout = "5"
-mpd_crossfade_time = "3"
 
-[playlist] 
-playlist_disable_highlight_delay = "1"
-#playlist_display_mode = "columns"
-playlist_display_mode = "classic"
-playlist_show_remaining_time = "yes"
-browser_display_mode = "columns"
-autocenter_mode = "yes"
-# fancy_scrolling = "yes"
-follow_now_playing_lyrics = "yes"
-# display_screens_numbers_on_start = "yes"
-ignore_leading_the = "yes"
-# lyrics_database = "1"
-song_columns_list_format = "(10)[blue]{l} (30)[green]{a} (30)[magenta]{b} (50)[yellow]{t}"
-
-[global]
-colors_enabled = "yes"
-enable_window_title = "yes"
 external_editor = "nvim"
-
-#main_window_highlight_color = "green"
-volume_color = "red"
-#progressbar_color = "black"
-progressbar_color = "cyan"
-statusbar_color = "default"
-#statusbar_color = "white"
-active_window_border = "red"
-alternative_header_first_line_format = "$0$aqqu$/a {$7%a - $9}{$5%t$9}|{$8%f$9} $0$atqq$/a$9"
-alternative_header_second_line_format = "{{$6%b$9}{ [$6%y$9]}}|{%D}"
-# alternative_header_second_line_format = "{{$6%b$9}{ [$6%y$9]}}"
-song_list_format = "{$3%n │ $9}{$7%a - $9}{$5%t$9}|{$8%f$9}$R{$6 │ %b$9}{$3 │ %l$9}"
-#user_interface = "alternative"
-user_interface = "classic"
 default_place_to_search_in = "database"
-
-[visualizer]
-## Fifo may be depreciated but I still use it (shrugs).
-## Details in ncmpcpp example conf re: an address of  
-## udpsink gstreamer's output instead of fifo
 visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
+visualizer_in_stereo = "no"
 # Can be ellipse, wave or spectrum
-visualizer_type = "ellipse" (spectrum/wave)
-visualizer_in_stereo = "yes"
-#visualizer_look = "+|"
-#visualizer_look = "●┃"
-#visualizer_color = "default"
-visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
+visualizer_type = "ellipse"
+visualizer_look = "▮▋"
+visualizer_color = "blue, cyan, green, yellow, magenta, red, black"
 
-[navigation]
-cyclic_scrolling = "no"
-header_text_scrolling = "no"
-jump_to_now_playing_song_at_start = "yes"
-lines_scrolled = "0"
 
-[other]
-system_encoding = "utf-8"
-regular_expressions = "extended"
+message_delay_time = "2"
 
-[selected tracks]
-selected_item_prefix = "* "
+playlist_shorten_total_times = "yes"
+playlist_display_mode = "classic"
+playlist_editor_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+autocenter_mode = "yes"
+centered_cursor = "yes"
+mouse_support = "yes"
+user_interface = "classic"
+follow_now_playing_lyrics = "yes"
+locked_screen_width_part = "60"
+display_bitrate = "no"
+header_visibility = "no"
+statusbar_visibility = "yes"
+titles_visibility = "no"
+statusbar_color = "blue"
+enable_window_title = "yes"
+
+header_window_color = "blue"
+
+main_window_color = "blue"
+
+current_item_prefix = "$5$r"
+
+
+now_playing_prefix = "$5$b $(9)"
+selected_item_prefix = "$(5)"
+
+song_status_format = "{%t}"
+song_list_format = "$5{%a} - $3{%t}{ar}$R{%l}"
+song_columns_list_format = "(50)[blue]{ar}(50)[green] {t}"
+song_window_title_format = "{%a - }{%t}|{%f}"
+
+progressbar_elapsed_color = "blue"
+progressbar_color = "black"
+progressbar_look = "━━━"
+alternative_ui_separator_color = "black"
 discard_colors_if_item_is_selected = "yes"
 
-[seeking]
-incremental_seeking = "yes"
-seek_time = "13"
 
-[visibility]
-header_visibility = "yes"
-statusbar_visibility = "yes"
-#statusbar_visibility = "no"
-titles_visibility = "yes"
-
-[statusbar]
-#progressbar_look = "─╼ "
-progressbar_look =  "=>-"
-#progressbar_elapsed_color = "white"
-
-[misc]
-now_playing_prefix = "$b$5"
-now_playing_suffix = "$/b$9"
-song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
-# autocenter_mode = "yes"
-centered_cursor = "yes"
-display_bitrate = "yes"
-# follow_now_playing_lyrics = "yes"
-# ignore_leading_the = "yes"
-empty_tag_marker = ""
-allow_for_physical_item_deletion = yes
-execute_on_song_change = notify-send "Now Playing ♫" "$(mpc current)"
-
-[library]
-empty_tag_color = "black"
+###################
+##  song format  ##
+##
+## For a song format you can use:
+##
+## %l - length
+## %f - filename
+## %D - directory
+## %a - artist
+## %A - album artist
+## %t - title
+## %b - album
+## %y - date
+## %n - track number (01/12 -> 01)
+## %N - full track info (01/12 -> 01/12)
+## %g - genre
+## %c - composer
+## %p - performer
+## %d - disc
+## %C - comment
+## %P - priority
+## $R - begin right alignment
+##
+##
+## Colors:
+##
+## - 0 - default window color (discards all other colors)
+## - 1 - black
+## - 2 - red
+## - 3 - green
+## - 4 - yellow
+## - 5 - blue
+## - 6 - magenta
+## - 7 - cyan
+## - 8 - white
+## - 9 - end of current color
+## - b - bold text
+## - u - underline text
+## - r - reverse colors
+## - a - use alternative character set
+##
+##
+###################################################################
+##  Custom command that will be executed each time song changes  ##
+##
+#execute_on_song_change = 
+#
+##
+###########################################################################
+##  Custom command that will be executed each time player state changes  ##
+##    The environment variable MPD_PLAYER_STATE is set to the current    ##
+##     state (either unknown, play, pause, or stop) for its duration     ##
+##
