@@ -7,26 +7,6 @@ name = "dracula"
 [icons]
 name = "awesome"
 
-[[block]]
-block = "music"
-player = "vlc"
-smart_trim = true
-hide_when_empty = true
-buttons = ["play", "next"]
-
-[[block]]
-block = "music"
-player = "brave"
-smart_trim = true
-hide_when_empty = true
-buttons = ["play", "next"]
-
-[[block]]
-block = "music"
-player = "ncmpcpp"
-smart_trim = true
-hide_when_empty = true
-buttons = ["play", "next"]
 
 # [[block]]
 # block = "temperature"
@@ -39,10 +19,14 @@ buttons = ["play", "next"]
 
 [[block]]
 block = "net"
-# device = "wlp82s0"
 icons_format = " {icon}"
+format_alt = " {ip}"
 format = "{speed_down}{speed_up}"
 interval = 1
+# device = "wlp82s0"
+[block.theme_overrides]
+idle_bg = "#44475a"
+idle_fg = "#f8f8f2"
 
 [[block]]
 block = "disk_space"
@@ -55,21 +39,20 @@ format = "{icon} {available:1}"
 
 [[block]]
 block = "memory"
+display_type = "memory"
 format_mem = "{mem_used:1}/{mem_total:1}({mem_used_percents:1})"
 format_swap = "{swap_used:1}/{swap_total:1}({swap_used_percents:1})"
-display_type = "memory"
-icons = true
-clickable = true
-interval = 5
-warning_mem = 80
-warning_swap = 80
-critical_mem = 95
-critical_swap = 95
+# icons_format = ""
+# format_mem = " \uf2db {mem_used_percents:1}"
+# format_swap = " \uf2db T:{mem_total_used_percents:1} C:{cached_percent:1} B:{buffers_percent:1}"
+[block.theme_overrides]
+idle_bg = "#44475a"
+idle_fg = "#f8f8f2"
 
 [[block]]
 block = "cpu"
 interval = 1
-format = "{utilization} {frequency}"
+format = "{utilization:1}"
 on_click = "kitty --class floating -e btop"
 
 [[block]]
@@ -82,6 +65,9 @@ minimum = 15
 maximum = 100
 cycle = [100, 30, 0, 30]
 on_click = "xfce4-power-manager -c"
+[block.theme_overrides]
+idle_bg = "#44475a"
+idle_fg = "#f8f8f2"
 
 
 [[block]]
@@ -90,6 +76,22 @@ interval = 10
 format = "{percentage} {time}"
 full_format = " {percentage}"
 on_click = "xfce4-power-manager -c"
+
+[[block]]
+block = "music"
+buttons = ["prev", "play", "next"]
+player = "mpd"
+format = "{title}"
+hide_when_empty = true
+smart_trim = true
+marquee_interval = 5
+max_width = 10
+on_click = "kitty --class floating -e ncmpcpp"
+[block.theme_overrides]
+idle_bg = "#44475a"
+idle_fg = "#f8f8f2"
+info_bg = "#BD93F9"
+info_fg = "#282A36"
 
 [[block]]
 block = "sound"
@@ -104,4 +106,9 @@ interval = 60
 icons_format = ""
 on_click = "kitty --class floating --hold -e cal -S -n 5"
 # format = "%a %D/% %r"
-format = "\uf073 %a, %d %B \uf017 %H:%M"
+format = " %a, %d \uf017 %H:%M"
+[block.theme_overrides]
+# idle_bg = "#BD93F9"
+# idle_fg = "#000000"
+idle_bg = "#44475a"
+idle_fg = "#f8f8f2"
