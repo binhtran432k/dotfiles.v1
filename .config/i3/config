@@ -8,7 +8,8 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 2
+# default_border pixel 2
+default_border none
 default_floating_border normal
 
 # Hide borders
@@ -17,7 +18,7 @@ hide_edge_borders none
 # change borders
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
-bindsym $mod+n border normal
+# bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -283,6 +284,9 @@ mode "resize" {
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
 
+# trigger flash focus
+bindsym $mod+n exec --no-startup-id flash_window
+
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
@@ -296,17 +300,18 @@ exec --no-startup-id clipit
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id conky -c ~/.config/conky/conky1.10_shortcuts.conf &
-exec --no-startup-id conky -c ~/.config/conky/conky.conf &
+exec --no-startup-id sleep 1 && conky -c ~/.config/conky/conky1.10_shortcuts.conf
+exec --no-startup-id sleep 1 && conky -c ~/.config/conky/conky.conf
 exec --no-startup-id xset r rate 300 50
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec --no-startup-id safeeyes
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id redshift-gtk
-exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd
+exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd & mpDris2
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id sleep 1 && flashfocus
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
