@@ -6,7 +6,11 @@ install: clean mkdir
 	ln -sf ~/dotfiles/.dmenurc ~/.dmenurc
 	ln -sf ~/dotfiles/.dir_colors ~/.dir_colors
 	chmod +x ~/dotfiles/script/brave-popup
+	chmod +x ~/dotfiles/script/i3lock-color
+	chmod +x ~/dotfiles/script/i3exit-color
 	ln -sf ~/dotfiles/script/brave-popup ~/.local/bin/
+	ln -sf ~/dotfiles/script/i3lock-color ~/.local/bin/
+	ln -sf ~/dotfiles/script/i3exit-color ~/.local/bin/
 	ln -snf ~/dotfiles/.config/nvim ~/.config/nvim
 	ln -snf ~/dotfiles/.config/i3 ~/.config/i3
 	ln -snf ~/dotfiles/.config/i3status ~/.config/i3status
@@ -24,13 +28,22 @@ install: clean mkdir
 	ln -snf ~/dotfiles/.config/btop ~/.config/btop
 	ln -snf ~/dotfiles/.config/ncmpcpp ~/.config/ncmpcpp
 	ln -snf ~/dotfiles/.config/mpd ~/.config/mpd
+	ln -snf ~/dotfiles/.config/neofetch ~/.config/neofetch
+	ln -snf ~/dotfiles/.config/morc_menu ~/.config/morc_menu
+	ln -snf ~/dotfiles/.config/qutebrowser ~/.config/qutebrowser
+	ln -snf ~/dotfiles/.config/mutt ~/.config/mutt
+	ln -snf ~/dotfiles/.config/msmtp ~/.config/msmtp
 	ln -snf ~/dotfiles/.config/picom.conf ~/.config/picom.conf
 	ln -snf ~/dotfiles/.config/redshift.conf ~/.config/redshift.conf
 	ln -snf ~/dotfiles/.fonts ~/.fonts
+	ln -snf ~/dotfiles/.goldendict ~/.goldendict
 mkdir:
 	mkdir -p ~/.local/bin/
 	mkdir -p ~/.config/
 clean:
+	rm -rf ~/.local/bin/brave-popup
+	rm -rf ~/.local/bin/i3lock-color
+	rm -rf ~/.local/bin/i3exit-color
 	rm -rf ~/.config/nvim
 	rm -rf ~/.config/i3
 	rm -rf ~/.config/i3status
@@ -48,7 +61,13 @@ clean:
 	rm -rf ~/.config/btop
 	rm -rf ~/.config/ncmpcpp
 	rm -rf ~/.config/mpd
+	rm -rf ~/.config/neofetch
+	rm -rf ~/.config/morc_menu
+	rm -rf ~/.config/qutebrowser
+	rm -rf ~/.config/mutt
+	rm -rf ~/.config/msmtp
 	rm -rf ~/.fonts
+	rm -rf ~/.goldendict
 sumkdir:
 	sudo mkdir -p /usr/share/icons/
 	sudo mkdir -p /usr/share/themes/
@@ -59,3 +78,9 @@ suinstall: sumkdir
 	sudo cp -rf ./themes/Ant-Dracula/ /usr/share/themes/
 	sudo cp -rf ./color-schemes/* /usr/share/color-schemes/
 	sudo cp -rf ./backgrounds/* /usr/share/backgrounds/user
+sleep: cleansleep
+	sudo mkdir -p /lib/systemd/system-sleep/
+	sudo cp -f ./script/xhci.sh /lib/systemd/system-sleep/xhci.sh
+	sudo chmod u+x /lib/systemd/system-sleep/xhci.sh
+cleansleep:
+	sudo rm -f /lib/systemd/system-sleep/xhci.sh
