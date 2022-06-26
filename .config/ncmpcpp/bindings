@@ -11,6 +11,8 @@ def_key "ctrl-f"
     page_down
 def_key "ctrl-b"
     page_up
+def_key "U"
+    update_database
 
 def_key "n"
     next
