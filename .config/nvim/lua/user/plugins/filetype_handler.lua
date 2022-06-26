@@ -23,6 +23,7 @@ function M.setup()
     overrides = {
       extensions = {
         scm = 'query',
+        conf = 'config',
       },
       literal = {
         ['tsconfig.json'] = 'jsonc',
