@@ -69,6 +69,17 @@ replace_env CHROME_EXECUTABLE $BROWSER
 
 # Add Android Studio Command line tools to PATH
 extend_env PATH "$media_disk/tools/Android/Sdk/cmdline-tools/latest/bin"
+extend_env PATH "$media_disk/tools/Android/Sdk/platform-tools"
+
+replace_env ANDROID_SDK_ROOT "$media_disk/tools/Android/Sdk"
+# Plantuml
+replace_env PLANTUML_JAR "$media_disk/tools/plantuml/plantuml.jar"
 
 # Add flutter to PATH
 extend_env PATH="$media_disk/tools/flutter/bin"
+
+# Make ranger source directory
+alias sclear="printf '\033[2J\033[3J\033[1;1H'"
+
+# Goldendict
+replace_env GOLDENDICT_PATH "$media_disk/GoldenDict"
