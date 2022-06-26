@@ -63,7 +63,7 @@ format = "{brightness:1}"
 invert_icons = true
 minimum = 15
 maximum = 100
-cycle = [100, 30, 0, 30]
+cycle = [100, 30, 0, 20]
 on_click = "xfce4-power-manager -c"
 [block.theme_overrides]
 idle_bg = "#44475a"
@@ -73,7 +73,7 @@ idle_fg = "#f8f8f2"
 [[block]]
 block = "battery"
 interval = 10
-format = "{percentage} {time}"
+format = " {percentage} {time}"
 full_format = " {percentage}"
 on_click = "xfce4-power-manager -c"
 
@@ -84,9 +84,9 @@ player = "mpd"
 format = "{title}"
 hide_when_empty = true
 smart_trim = true
-marquee_interval = 5
+marquee_interval = 10
 max_width = 10
-on_click = "kitty --class floating -e ncmpcpp"
+on_click = "kitty --class floating -e ncmpcpp -s visualizer"
 [block.theme_overrides]
 idle_bg = "#44475a"
 idle_fg = "#f8f8f2"
