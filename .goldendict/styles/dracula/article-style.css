@@ -1,0 +1,389 @@
+/* mkdir ~/.goldendict/styles/arc-dark/
+then put this stylesheet there */
+body {
+  margin-top: 1px;
+  margin-right: 3px;
+  margin-left: 2px;
+  margin-bottom: 3px;
+  background: #282A36;
+  color: #F8F8F2;
+  font-family: sans-serif, monospace, serif;
+  font-size: 12px;
+}
+
+a:link {
+  color: #BD93F9;
+}
+
+ul {
+  color: #F8F8F2;
+}
+
+.gdarticle {
+  background: #282A36;
+  color: #F8F8F2;
+  margin-top: 0.1em;
+  margin-bottom: 0.4em;
+  padding: 5px;
+  border: 1px solid #BFBFBF;
+}
+
+.gdactivearticle {
+  border: none;
+  border-bottom: 1px solid #BD93F9;
+  padding: 2ch;
+}
+
+.gdarticleseparator + script + .gdactivearticle .gddictname {
+  border-top: 1px solid #BD93F9;
+}
+
+.gdarticleseparator {
+  display: none;
+}
+
+.gddictname {
+  font-size: 120%;
+  font-weight: bold;
+  float: right;
+  border: 0px;
+  margin: -6px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  padding-right: 0.4em;
+
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.gdactivearticle .gddictname {
+  font-size: 120%;
+  font-weight: normal;
+  margin: 0px;
+  float: right;
+  border: none;
+}
+
+.gddicticon {
+  display: none;
+}
+
+.gdfromprefix {
+  display: none;
+}
+
+.collapse_expand_area {
+  width: 17px;
+  height: 18px;
+}
+
+.collapse_expand_area > img {
+  margin-left: 4px;
+  /* display: none; */
+  opacity: 0;
+}
+
+.collapse_expand_area::after {
+  content: "  ";
+  position: relative;
+  left: -16px;
+  pointer-events: none;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #BD93F9 transparent transparent transparent;
+}
+
+/**
+ * Old Dictionaries using DSL format
+ */
+.gdarticlebody > span:first-child .dsl_headwords,
+.gdarticlebody > h3:first-child {
+  margin-top: -3px;
+  display: inline-block;
+}
+
+.gdspellsuggestion {
+  /* Add some vertical space before the article */
+  margin-top: 1.5em;
+}
+
+.dsl_article,
+.dsl_definition,
+.dsl_ex,
+.dsl_opt,
+.dsl_lang,
+.dsl_m0,
+.dsl_m1,
+.dsl_m2,
+.dsl_m3,
+.dsl_m4,
+.dsl_u,
+.dsl_b,
+.dsl_i,
+.dsl_i font
+{
+  color: #F8F8F2 !important;
+}
+
+font[color="black"],
+font[color="darkslategray"],
+font[color="dimgray"],
+font[color="#333399"],
+font[color="#282828"]
+{
+  color: #BFBFBF !important;
+}
+
+.dsl_b font {
+  color: #F1FA8C !important;
+}
+
+.dsl_m0 font,
+font[color="maroon"],
+font[color="sienna"],
+font[color="darkred"],
+font[color="rosybrown"],
+font[color="crimson"],
+font[color="red"],
+font[color="#c30000"],
+font[color="#cc0000"],
+font[color="#ff3300"]
+{
+  color: #FF5555 !important;
+}
+
+.dsl_p,
+font[color="orangered"],
+font[color="purple"]
+{
+  color: #FF79C6 !important;
+}
+
+.dsl_m2 font,
+font[color="darkgreen"],
+font[color="green"],
+font[color="teal"],
+font[color="darkcyan"],
+font[color="#005e00"]
+{
+  color: #50FA7B !important;
+}
+
+.dsl_m3 font,
+font[color="blue"],
+font[color="#3366ff"]
+{
+  color: #8BE9FD !important;
+}
+
+font[color="#666699"],
+font[color="darkmagenta"],
+font[color="mediumvioletred"],
+font[color="navy"]
+{
+  color: #BD93F9 !important;
+}
+
+.dsl_article .dsl_definition {
+  color: #F1FA8C !important;
+}
+
+::selection {
+  background: #BD93F9;
+  color: #F8F8F2;
+}
+
+code::selection {
+  background: #F8F8F2;
+}
+
+.dsl_s_wav img,
+.lsa_play img,
+.forvo_play img[alt="Play"] {
+  /**
+  display: none;
+  **/
+}
+
+.dsl_s_wav a,
+.lsa_play td:nth-of-type(1) a,
+.forvo_play td:nth-of-type(1) a {
+  color: #F8F8F2;
+  width: 18px;
+  height: 14px;
+  /**
+  display: inline-block;
+  background: url('file:///control_play_lingvo.png') no-repeat center;
+  vertical-align: text-bottom;
+  -webkit-user-select: none;
+  user-select: none;
+  **/
+}
+
+/**
+ * OALD9 Dictionary
+ */
+
+.mdict,
+.mdict ol,
+.head-jump-pos,
+.head-jump-entry,
+.h-g,
+sn-gs,
+.sn-g,
+.x-gs,
+.xg,
+.rx-g,
+.x,
+.num,
+.def,
+.label-g,
+.collapse {
+  color: #F8F8F2 !important;
+}
+
+.head-jump-pos a {
+  display: inline-block;
+  background-color: green;
+  color: #F8F8F2 !important;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  text-decoration: none;
+  font-size: 90%;
+  border-radius: 2px;
+}
+
+.mdict .if-gs {
+  color: #FF5555 !important;
+}
+
+.mdict .gram-g {
+  color: #FF79C6 !important;
+}
+
+.mdict .top-container {
+  line-height: 1.2em !important;
+}
+
+.mdict .collapse,
+.mdict .webtop-g {
+  background-color: #BD93F9 !important;
+  border-left: 3px solid #BD93F9 !important;
+}
+
+.mdict .collapse .body .h1,
+.mdict .collapse .body .deflist .li .eb {
+  color: #FF5555 !important;
+}
+
+.mdict .collapse .body .inline .li {
+  color: #BD93F9 !important;
+}
+
+/** Fix numbered list **/
+.mdict ol {
+  list-style-type: none;
+}
+
+.mdict ol li {
+  counter-increment: step-counter;
+}
+
+.mdict ol li::before {
+  content: counter(step-counter);
+  color: #FF5555 !important;
+  font-weight: bold;
+}
+
+/** Fix phonetics **/
+
+.mdict .phon {
+  color: #FF5555 !important;
+  font-weight: bold;
+}
+
+/**
+ * Longman Dictionary 6
+ */
+
+.entry,
+.example,
+.collocate,
+.collgloss,
+.sense,
+.neutral,
+.exas li {
+  color: #F8F8F2 !important;
+}
+
+.hyphenation,
+.homnum,
+.frequent {
+  color: #F1FA8C !important;
+}
+
+.pron,
+.amevarpron {
+  color: #FF5555 !important;
+  font-weight: bold;
+}
+
+.gram,
+.registerlab {
+  color: #BD93F9 !important;
+}
+
+.propformprep,
+.expr,
+.colloc,
+.collo,
+.exp,
+.display,
+.nodeword {
+  color: #FF79C6 !important;
+}
+
+.sensenum {
+  color: #FF5555 !important;
+}
+
+.collobox {
+  background-color: #8BE9FD !important;
+  border-color: #8BE9FD !important;
+}
+
+.thesbox {
+  background-color: #F1FA8C !important;
+  border-color: #F1FA8C !important;
+}
+
+.grambox .expl,
+.grambox .compareword,
+.collobox .section,
+.thesbox .section {
+  background-color: #282A36 !important;
+}
+
+.secheading {
+  background-color: #8BE9FD !important;
+}
+
+table,
+#definition_T_id,
+#mh_n_T_id,
+#mh_T_id,
+#C_C {
+  color: #F8F8F2 !important;
+}
+
+#C_C font {
+  color: #F8F8F2 !important;
+}
