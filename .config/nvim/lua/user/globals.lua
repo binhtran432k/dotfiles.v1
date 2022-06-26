@@ -20,6 +20,7 @@ function M.setup()
     'toggleterm',
     'TelescopePrompt',
   }
+  _G.is_readonly_mode = (vim.g.readonly_mode == 1)
 end
 
 return M

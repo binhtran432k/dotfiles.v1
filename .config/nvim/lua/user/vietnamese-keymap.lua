@@ -2,9 +2,9 @@ local M = {}
 
 function M.setup()
   vim.cmd([[
-  command Vni set keymap=vietnamese-vni
-  command Telex set keymap=vietnamese-telex
-  command Eng set keymap=
+  command! Vni set keymap=vietnamese-vni
+  command! Telex set keymap=vietnamese-telex
+  command! Eng set keymap=
   augroup keymap_handler
     " Restore engine for search
     autocmd CmdLineEnter [/?] silent setlocal timeoutlen=1000

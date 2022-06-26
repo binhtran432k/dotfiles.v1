@@ -39,24 +39,12 @@ function M.bind_keys()
     {
       key = 's',
       cmd = '<Cmd>HopChar1<CR>',
-      opt = { silent = true },
+      opt = { silent = true, nowait = true },
     },
     {
       key = 'S',
       cmd = '<Cmd>HopWord<CR>',
-      opt = { silent = true },
-    },
-    {
-      mode = { 'o' },
-      key = 'z',
-      cmd = '<Cmd>HopChar1<CR>',
-      opt = { silent = true },
-    },
-    {
-      mode = { 'x', 'o' },
-      key = 'Z',
-      cmd = '<Cmd>HopWord<CR>',
-      opt = { silent = true },
+      opt = { silent = true, nowait = true },
     },
   }
 
@@ -74,13 +62,6 @@ function M.bind_which_keys()
         ['s'] = 'Move before 1 char by Hop',
         ['S'] = 'Move before word by Hop',
       },
-    },
-    {
-      mapping = {
-        ['z'] = 'Move before 1 char by Hop',
-        ['Z'] = 'Move before word by Hop',
-      },
-      mode = { 'o', 'x' },
     },
   }
 

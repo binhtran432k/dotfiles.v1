@@ -20,7 +20,7 @@ function M.setup()
   end
 
   local colorizer = require('colorizer')
-  colorizer.setup({ '*' }, {
+  colorizer.setup(nil, {
     RGB = true, -- #RGB hex codes
     RRGGBB = true, -- #RRGGBB hex codes
     RRGGBBAA = true, -- #RRGGBBAA hex codes

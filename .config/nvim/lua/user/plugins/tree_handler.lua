@@ -14,6 +14,7 @@ function M.init(use, plugin_fn)
   })
 
   M.is_init = true
+  M.setup_autocmd()
 
   return { key = true, which_key = true }
 end
@@ -25,73 +26,39 @@ function M.setup()
 
   local nvim_tree = require('nvim-tree')
   nvim_tree.setup({
-    disable_netrw = true,
-    hijack_netrw = true,
-    open_on_setup = false,
     ignore_ft_on_setup = {
       'startify',
       'dashboard',
       'alpha',
     },
-    auto_close = true,
-    open_on_tab = false,
-    hijack_cursor = false,
-    update_cwd = true,
-    update_to_buf_dir = {
-      enable = true,
-      auto_open = true,
-    },
     diagnostics = {
       enable = false,
       icons = {
-        -- hint = '',
-        -- info = '',
-        -- warning = '',
-        -- error = '',
-        hint = '',
-        info = '',
-        warning = '',
-        error = '',
+        hint = ' ',
+        info = ' ',
+        warning = ' ',
+        error = ' ',
       },
-    },
-    update_focused_file = {
-      enable = true,
-      update_cwd = true,
-      ignore_list = {},
-    },
-    system_open = {
-      cmd = nil,
-      args = {},
     },
     filters = {
-      dotfiles = false,
-      custom = {},
+      dotfiles = true,
     },
-    git = {
-      enable = true,
-      ignore = true,
-      timeout = 500,
+    renderer = {
+      group_empty = true,
     },
     view = {
-      width = 30,
-      height = 30,
-      hide_root_folder = false,
       side = 'left',
-      auto_resize = false,
+      adaptive_size = true,
       mappings = {
-        custom_only = false,
         list = {
-          { key = { 'l' }, action = 'cd' },
-          { key = { 'h' }, action = 'parent_node' },
+          { key = 'l', action = 'cd' },
+          { key = '<space>', action = 'preview' },
+          { key = 'u', action = 'dir_up' },
         },
       },
-      number = true,
-      relativenumber = true,
-      signcolumn = 'yes',
-    },
-    trash = {
-      cmd = 'trash',
-      require_confirm = true,
+      -- number = true,
+      -- relativenumber = true,
+      -- signcolumn = 'yes',
     },
   })
 
@@ -129,6 +96,18 @@ function M.bind_which_keys()
   }
 
   require('user.plugins.which-key_handler').bind_which_keys(which_keys)
+end
+
+function M.setup_autocmd()
+  if not M.is_init then
+    return
+  end
+
+  vim.cmd([[
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+      \ execute 'cd '.argv()[0] | execute 'NvimTreeOpen' | endif
+  ]])
 end
 
 return M

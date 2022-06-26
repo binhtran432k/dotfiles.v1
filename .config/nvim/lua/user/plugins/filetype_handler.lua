@@ -22,11 +22,14 @@ function M.setup()
   filetype.setup({
     overrides = {
       extensions = {
-        json = 'jsonc',
         scm = 'query',
       },
       literal = {
+        ['tsconfig.json'] = 'jsonc',
         config = 'config',
+      },
+      complex = {
+        -- ['%..*rc'] = 'config',
       },
     },
   })

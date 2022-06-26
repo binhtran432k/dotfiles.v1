@@ -13,7 +13,7 @@ function M.init(use, plugin_fn)
     cmd = { 'GitBlameEnable', 'GitBlameToggle' },
   })
 
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { key = true, which_key = true }
 end

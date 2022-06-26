@@ -91,12 +91,12 @@ function M.bind_keys()
       cmd = '<Cmd>Telescope find_files<CR>',
     },
     {
-      key = '<leader>fi',
-      cmd = '<Cmd>Telescope find_files no_ignore=true<CR>',
+      key = '<C-p>',
+      cmd = '<Cmd>Telescope find_files<CR>',
     },
     {
-      key = '<leader>fI',
-      cmd = '<Cmd>Telescope live_grep no_ignore=true<CR>',
+      key = '<leader>fi',
+      cmd = '<Cmd>Telescope find_files no_ignore=true<CR>',
     },
     {
       key = '<leader>fg',
@@ -131,6 +131,7 @@ function M.bind_which_keys()
           b = 'Find buffers',
           h = 'Find helps',
         },
+        ['<C-p>'] = 'Telescope find files',
       },
     },
   }

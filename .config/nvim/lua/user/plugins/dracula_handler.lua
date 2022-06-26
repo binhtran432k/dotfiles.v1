@@ -31,13 +31,19 @@ function M.setup()
   vim.cmd([[
   syntax on
   colorscheme dracula
+  autocmd ColorScheme * lua require('user.plugins.dracula_handler').update_highlight()
   ]])
 
-  vim.cmd([[
-  autocmd ColorScheme * lua require('user.plugins.treesitter_handler').update_highlight_pair()
-  ]])
+  require('user.plugins.dracula_handler').update_highlight()
+end
 
+function M.update_highlight()
   require('user.plugins.treesitter_handler').update_highlight_pair()
+  require('user.plugins.ts_context_handler').update_highlight()
+  require('user.plugins.fidget_handler').update_highlight()
+  vim.cmd([[
+  highlight! default link Visual QuickFixLine
+  ]])
 end
 
 return M

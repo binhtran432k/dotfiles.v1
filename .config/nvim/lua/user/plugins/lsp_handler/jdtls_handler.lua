@@ -13,7 +13,8 @@ M.is_init = false
 M.setup_server = function() end
 
 function M.init(use, plugin_fn)
-  lsp_installer = lsp_installer or require('user.plugins.lsp_handler.lsp-installer_handler')
+  lsp_installer = lsp_installer
+      or require('user.plugins.lsp_handler.lsp-installer_handler')
 
   use({
     M.repo,
@@ -30,6 +31,10 @@ function M.setup()
   M.setup_server = M._setup_server
 end
 
+function M.setup_home()
+  vim.env.JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'
+end
+
 function M._setup_server(server, on_attach, capabilities)
   if not M.is_init then
     return
@@ -37,18 +42,16 @@ function M._setup_server(server, on_attach, capabilities)
 
   local server_default_options = server:get_default_options()
 
-  M.opts = {
-    cmd = server_default_options.cmd,
-    autostart = true,
+  M.opts = vim.tbl_deep_extend('force', server_default_options, {
+    name = 'jdtls',
     filetypes = { 'java' },
-    root_dir = require('jdtls.setup').find_root({
-      '.git',
-      'mvnw',
-      'gradlew',
-    }),
-    -- root_dir = server_default_options.root_dir,
+    root_dir = server_default_options.root_dir,
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+      -- require('jdtls.dap').setup_dap_main_class_configs({ verbose = true })
+      on_attach(client, bufnr)
+    end,
     flags = {
       allow_incremental_sync = true,
     },
@@ -59,7 +62,14 @@ function M._setup_server(server, on_attach, capabilities)
         },
       },
     },
-  }
+    init_options = {
+      bundles = {
+        vim.fn.glob(
+          '/home/binhtran432k/.local/share/nvim/lsp_servers/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'
+        ),
+      },
+    },
+  })
 
   M.is_lsp_setup = true
 
@@ -73,10 +83,15 @@ function M.lsp_setup()
     return
   end
 
+  require('jdtls.setup').add_commands()
+
   local jdtls = require('jdtls')
   jdtls.start_or_attach(M.opts)
 
-  M._setup_commands()
+  vim.cmd([[
+  nnoremap <leader>df <Cmd>lua require'jdtls'.test_class()<CR>
+  nnoremap <leader>dn <Cmd>lua require'jdtls'.test_nearest_method()<CR>
+  ]])
 end
 
 function M._setup_commands()
@@ -87,6 +102,7 @@ function M._setup_commands()
   command! -buffer JdtJol lua require('jdtls').jol()
   command! -buffer JdtBytecode lua require('jdtls').javap()
   command! -buffer JdtJshell lua require('jdtls').jshell()
+  command! -buffer JdtDap lua require('jdtls').setup_dap({ hotcodereplace = 'auto' })
   ]])
 end
 

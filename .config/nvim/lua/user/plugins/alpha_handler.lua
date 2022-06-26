@@ -13,11 +13,13 @@ function M.init(use, plugin_fn)
       dependencies_handler.web_devicons,
       dependencies_handler.plenary,
     },
-    cond = 'vim.fn.argc() == 0',
+    -- cond = 'vim.fn.argc() == 0',
+    -- cmd = 'Alpha',
     -- event = 'BufRead',
     config = plugin_fn('setup'),
   })
-  M.is_init = true
+
+  M.is_init = true and not _G.is_readonly_mode
 end
 
 function M.setup()
@@ -230,7 +232,7 @@ function M.setup()
         ':e ~/.config/nvim/init.lua <CR>'
       ),
       dashboard.button('u', '  Update plugins', ':PackerSync<CR>'),
-      dashboard.button('q', '  Quit', ':qa<CR>'),
+      dashboard.button('q', '  Quit', ':qa<CR>'),
     },
     position = 'center',
   }
@@ -245,7 +247,8 @@ function M.setup()
       buttons,
     },
     opts = {
-      margin = 5,
+      margin = 0,
+      -- noautocmd = true,
     },
   }
 

@@ -5,6 +5,8 @@ local M = {}
 M.repo = 'lukas-reineke/indent-blankline.nvim'
 M.is_init = false
 M.extend_keys = {
+  '0',
+  '^',
   'za',
   'zo',
   'zA',
@@ -36,6 +38,7 @@ function M.setup()
     char_highlight_list = _G.rainbow_colors,
     show_trailing_blankline_indent = false,
     filetype_exclude = _G.special_file_types,
+    char_list = { '¦', '┆', '┊' },
     buftype_exclude = { 'terminal', 'nofile' },
   })
 end
@@ -48,7 +51,7 @@ function M.bind_keys()
   -- Default mapping
   local binds = {}
   for _, key in pairs(M.extend_keys) do
-    binds[#binds+1] = M.get_extended_refresh_key(key)
+    binds[#binds + 1] = M.get_extended_refresh_key(key)
   end
 
   mappings.bind_keys(binds)

@@ -11,7 +11,7 @@ function M.init(use, plugin_fn)
     config = plugin_fn('setup'),
   })
 
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   -- return { key = true, which_key = true }
 end

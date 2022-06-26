@@ -1,5 +1,3 @@
-local indent_o_matic = require('user.plugins.indent-o-matic_handler')
-
 local M = {}
 
 M.lazy_plugins = {}
@@ -43,7 +41,7 @@ function M.setup()
     -- Toggle Spelling
     {
       key = '<C-Space>',
-      cmd = '<Cmd>set spell!<CR>',
+      cmd = '<Cmd>set spell!|if &spell|echo "on"|else|echo "off"|endif<CR>',
       opt = { silent = true },
     },
   }
@@ -58,12 +56,23 @@ function M.setup()
 end
 
 function M.refresh()
-  vim.cmd([[redraw!]])
-  vim.cmd([[colorscheme dracula]])
-  vim.cmd([[nohlsearch]])
-  if indent_o_matic.is_init then
-    vim.cmd([[IndentOMatic]])
-  end
+  vim.cmd([[nohlsearch | write | edit | TSBufEnable highlight | IndentOMatic]])
+  -- vim.cmd([[redraw!]])
+  -- vim.cmd([[syntax reset]])
+  -- vim.cmd([[IndentBlanklineRefresh]])
+  -- vim.cmd([[IndentBlanklineRefreshScroll]])
+  -- -- if require('user.plugins.dracula_handler').is_init then
+  -- --   vim.cmd([[colorscheme dracula]])
+  -- -- end
+  -- if require('user.plugins.treesitter_handler').is_init then
+  --   vim.cmd([[
+  --   TSBufDisable all
+  --   TSBufEnable all
+  --   ]])
+  -- end
+  -- if require('user.plugins.indent-o-matic_handler').is_init then
+  --   vim.cmd([[IndentOMatic]])
+  -- end
 end
 
 -- Remove Highlight text when press <cr> if there is

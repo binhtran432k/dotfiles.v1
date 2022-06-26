@@ -25,6 +25,7 @@ M.plugins = {
   'autopairs',
   -- (( Status line ))
   'lualine',
+  'fidget',
   'bufferline',
   -- -- (( Terminal ))
   'toggleterm',
@@ -35,9 +36,12 @@ M.plugins = {
   'ts_context',
   -- 'gps',
   'iswap',
+  'spellsitter',
+  'neogen',
   -- (( LSP ))
   'lsp',
   -- (( Debugging ))
+  'dap',
   -- (( Indentation ))
   'indent-blankline', -- Add indentation guides even on blank lines
   'indent-o-matic', -- For fast auto detect indent
@@ -58,15 +62,14 @@ M.plugins = {
   'textobj-user',
   'improves',
   'openbrowser',
-  'spellsitter',
   'pretty-fold',
-  'neogen',
   -- (( Highlight Syntax Fallback ))
   'languages',
   -- (( Extensions ))
   'vimtex',
-  'rest',
+  -- 'rest',
   'markdown-preview',
+  'httpyac',
   -- 'plantuml-preview',
 }
 
@@ -88,11 +91,6 @@ function M.setup()
 
     -- (( Plugins ))
     M.init_plugins(use, 'user.plugins', M.plugins)
-
-    -- (( Debugging ))
-    use('mfussenegger/nvim-dap') -- Debug Adapter Protocol
-    use('rcarriga/nvim-dap-ui')
-    use('theHamsta/nvim-dap-virtual-text')
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

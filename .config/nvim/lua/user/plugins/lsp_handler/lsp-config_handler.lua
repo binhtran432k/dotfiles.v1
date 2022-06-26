@@ -8,7 +8,7 @@ local M = {}
 
 M.repo = 'neovim/nvim-lspconfig'
 M.name = 'nvim-lspconfig'
-M.plugin_fn = function() end
+M.plugin_fn = function(_) end
 M.is_init = false
 
 function M.init(use, plugin_fn)
@@ -16,7 +16,7 @@ function M.init(use, plugin_fn)
   use({
     M.repo,
     config = plugin_fn('setup'),
-    event = 'BufRead',
+    event = { 'CursorHold', 'CursorHold' },
   })
 
   M.plugin_fn = plugin_fn
@@ -30,7 +30,7 @@ function M.setup()
     return
   end
 
-  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
   for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -143,7 +143,7 @@ end
 function M.setup_disable_lsp_formatings(client, disables)
   for _, disable_client in ipairs(disables) do
     if client.name == disable_client then
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
     end
   end
 end
@@ -156,7 +156,7 @@ function M.setup_formarting(bufnr)
   local binds = {
     {
       key = '<leader>p',
-      cmd = [[<Cmd>lua vim.lsp.buf.formatting()<CR>]],
+      cmd = [[<Cmd>lua vim.lsp.buf.format({ async = true })<CR>]],
       opt = { silent = true },
     },
   }
@@ -171,7 +171,7 @@ function M.setup_formarting(bufnr)
   }
   which_key.bind_buf_which_keys(bufnr, which_keys)
 
-  vim.cmd([[command! Format execute 'lua vim.lsp.buf.formatting()']])
+  vim.cmd([[command! Format execute 'lua vim.lsp.buf.format({ async = true })']])
 
   vim.cmd(
     string.format(
@@ -293,8 +293,15 @@ function M.setup_lsp_keymaps(bufnr)
   mappings.bind_buf_keys(bufnr, binds)
 end
 
+function M.is_disable(bufnr)
+  return bufnr and vim.api.nvim_buf_line_count(bufnr) > 10000
+end
+
 function M.get_on_attach()
   return function(client, bufnr)
+    if M.is_disable(bufnr) then
+      client.stop()
+    end
     if null_ls and null_ls.is_init then
       M.setup_disable_lsp_formatings(client, null_ls.override_lsp_formatings)
     end
@@ -364,7 +371,7 @@ function M.get_lualine(fmt)
       end
       return msg
     end,
-    icon = '',
+    icon = ' ',
     fmt = fmt,
   }
 end

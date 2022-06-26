@@ -19,7 +19,7 @@ function M.init(use, plugin_fn)
   })
 
   M.plugin_fn = plugin_fn
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { filetype_setup = true }
 end
@@ -29,7 +29,11 @@ function M.register_filetype_setup()
     return
   end
 
-  configs.register_filetype('fugitive', 'fugitive', M.plugin_fn('filetype_setup'))
+  configs.register_filetype(
+    'fugitive',
+    'fugitive',
+    M.plugin_fn('filetype_setup')
+  )
 end
 
 function M.filetype_setup()
@@ -177,6 +181,9 @@ function M.bind_buf_which_keys()
           ['?'] = { 'Show help' },
         },
         ['.'] = { 'Start : with file' },
+      },
+      opts = {
+        nowait = true,
       },
     },
   }

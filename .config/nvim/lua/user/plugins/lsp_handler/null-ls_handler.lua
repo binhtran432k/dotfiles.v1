@@ -7,7 +7,9 @@ M.repo = 'jose-elias-alvarez/null-ls.nvim'
 M.is_init = false
 M.override_lsp_formatings = {
   'tsserver',
+  'stylelint_lsp',
   'html',
+  'sumneko_lua',
   -- 'jdtls',
 }
 M.extra_ft_formattings = {
@@ -43,11 +45,11 @@ function M.setup()
   -- https://github.com/prettier-solidity/prettier-plugin-solidity
   -- npm install --save-dev prettier prettier-plugin-solidity
   null_ls.setup({
-    debug = false,
+    debug = true,
     sources = {
       formatting.prettier.with({
         extra_filetypes = { 'toml', 'solidity' },
-        extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
+        extra_args = { '--single-quote', '--jsx-single-quote' },
       }),
       formatting.black.with({ extra_args = { '--fast' } }),
       formatting.stylua,
@@ -64,6 +66,7 @@ function M.setup()
       end
       return true
     end,
+    -- root_dir = u.root_pattern('.null-ls-root', 'Makefile', '.git'),
     -- fallback_severity = vim.diagnostic.severity.HINT,
   })
 

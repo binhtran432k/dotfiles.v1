@@ -14,7 +14,7 @@ function M.init(use, plugin_fn)
     config = plugin_fn('setup'),
   })
 
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { which_key = true }
 end
@@ -105,14 +105,14 @@ function M.setup()
       -- Navigation
       map(
         'n',
-        ']c',
-        "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+        ']h',
+        "&diff ? ']h' : '<cmd>Gitsigns next_hunk<CR>'",
         { expr = true }
       )
       map(
         'n',
-        '[c',
-        "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+        '[h',
+        "&diff ? '[h' : '<cmd>Gitsigns prev_hunk<CR>'",
         { expr = true }
       )
 
@@ -150,8 +150,8 @@ function M.bind_which_keys()
   local which_keys = {
     {
       mapping = {
-        ['[c'] = 'Previous hunk',
-        [']c'] = 'Next hunk',
+        ['[h'] = 'Previous hunk',
+        [']h'] = 'Next hunk',
         ['<leader>h'] = {
           name = 'GitSigns',
           S = 'Stage buffer hunk',

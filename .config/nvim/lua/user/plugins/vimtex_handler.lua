@@ -17,7 +17,7 @@ function M.init(use, plugin_fn)
   })
 
   M.plugin_fn = plugin_fn
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { filetype_setup = true }
 end

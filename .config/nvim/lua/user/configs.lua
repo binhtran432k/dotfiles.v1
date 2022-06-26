@@ -4,69 +4,86 @@ local M = {}
 -- @type table<string, function>
 M.filetype_setups = {}
 
+local commonOptions = {
+  -- (( Color scheme ))
+  termguicolors = true,
+  background = 'dark',
+  -- (( Column ruler ))
+  colorcolumn = { 80, 100, 120 },
+  -- (( Search case ))
+  ignorecase = true,
+  smartcase = true,
+  -- (( Cursor ))
+  -- cursorcolumn = true,
+  -- cursorline = true,
+  -- (( Cursor shape ))
+  -- guicursor = 'n-c:block,i-ci-ve:ver40,r-cr-v:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175',
+  -- guicursor = 'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
+  -- guicursor = 'n-c:block',
+  -- guifont = 'Delugia',
+  -- (( Mouse selection ))
+  mouse = 'a',
+  -- (( Indent ))
+  tabstop = 4,
+  softtabstop = 4,
+  shiftwidth = 4,
+  expandtab = true,
+  smarttab = true,
+  -- (( Increment priority ))
+  nrformats = { 'alpha', 'bin', 'hex' },
+  -- (( Line number ))
+  number = true,
+  relativenumber = false,
+  -- (( LSP ))
+  -- unicode characters in the file autoload/float.vim
+  encoding = 'utf-8',
+  -- TextEdit might fail if hidden is not set.
+  hidden = true,
+  -- Some servers have issues with backup files, see #649.
+  backup = false,
+  writebackup = false,
+  -- showmode = false,
+  -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+  -- delays and poor user experience.
+  updatetime = 250,
+  -- (( Split window ))
+  splitbelow = true,
+  splitright = true,
+  -- (( Others ))
+  signcolumn = 'yes', -- display sign in column
+  wrap = false, -- no wrap for long text
+  scrolloff = 3, -- make cursor in middle
+  sidescrolloff = 8,
+  timeoutlen = 100, -- for which key
+  completeopt = 'menu,menuone,noinsert', -- autocomplete menu
+}
+
 function M.setup()
-  local options = {
-    -- (( Color scheme ))
-    termguicolors = true,
-    background = 'dark',
-    -- (( Column ruler ))
-    colorcolumn = { 80, 100, 120 },
-    -- (( Search case ))
-    ignorecase = true,
-    smartcase = true,
-    -- (( Cursor ))
-    -- cursorcolumn = true,
-    -- cursorline = true,
-    -- (( Cursor shape ))
-    -- guicursor = 'n-c:block,i-ci-ve:ver40,r-cr-v:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175',
-    -- guicursor = 'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
-    -- guicursor = 'n-c:block',
-    -- guifont = 'Delugia',
-    -- (( Mouse selection ))
-    mouse = 'a',
-    -- (( Indent ))
-    tabstop = 4,
-    softtabstop = 4,
-    shiftwidth = 4,
-    expandtab = true,
-    smarttab = true,
-    -- (( Increment priority ))
-    nrformats = { 'alpha', 'bin', 'hex' },
-    -- (( Line number ))
-    number = true,
-    relativenumber = true,
-    -- (( LSP ))
-    -- unicode characters in the file autoload/float.vim
-    encoding = 'utf-8',
-    -- TextEdit might fail if hidden is not set.
-    hidden = true,
-    -- Some servers have issues with backup files, see #649.
-    backup = false,
-    writebackup = false,
+  local options = vim.list_extend(commonOptions, {
     -- Give more space for displaying messages.
     cmdheight = 2,
-    -- showmode = false,
-    -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-    -- delays and poor user experience.
-    updatetime = 250,
-    -- (( Split window ))
-    splitbelow = true,
-    splitright = true,
     -- (( Spelling ))
     -- spell = true,
     spelllang = { 'en_us', 'vi' },
     spelloptions = 'camel',
     spellcapcheck = '', -- better for code checking
     -- spellfile = 'custom.utf-8.add',
-    -- (( Others ))
-    signcolumn = 'yes', -- display sign in column
-    wrap = false, -- no wrap for long text
-    scrolloff = 3, -- make cursor in middle
-    sidescrolloff = 8,
-    timeoutlen = 100, -- for which key
-    completeopt = 'menu,menuone,noinsert', -- autocomplete menu
-  }
+  })
+  M.setup_all(options)
+end
 
+function M.setup_readonly()
+  local options = vim.list_extend(commonOptions, {
+    -- laststatus = 0,
+    -- statusline= [[%<%f %p%% %{''}%l/%L :%v]],
+    statusline = [[%<%f %h%m%r%=%-.(%p%% %{''}%l/%L :%v%)]],
+    readonly = true,
+    -- modifiable = false,
+  })
+  M.setup_all(options)
+end
+
+function M.setup_all(options)
   -- Don't pass messages to |ins-completion-menu|.
   vim.opt.shortmess:append('c')
 
@@ -95,22 +112,22 @@ function M.setup()
 
   -- Save last cursor position and folding
   vim.opt.viewoptions:remove('options')
-  -- vim.cmd([[
-  -- augroup remember_folds
-  --   autocmd!
-  --   autocmd BufWinLeave *.* if &ft !=# 'help' | mkview | endif
-  --   autocmd BufWritePost *.* if &ft !=# 'help' | mkview | endif
-  --   autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
-  -- augroup END
-  -- ]])
   vim.cmd([[
   augroup remember_last_jump
-    autocmd BufRead * autocmd FileType <buffer> ++once
-      \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
-    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-          \ | wincmd p | diffthis
+    autocmd!
+    autocmd BufWinLeave *.* if &ma == 1 && &ft !=# 'help' | mkview | endif
+    autocmd BufWritePost *.* if &ma == 1 && &ft !=# 'help' | mkview | endif
+    autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
   augroup END
   ]])
+  -- vim.cmd([[
+  -- augroup remember_last_jump
+  --   autocmd BufRead * autocmd FileType <buffer> ++once
+  --     \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
+  --   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+  --         \ | wincmd p | diffthis
+  -- augroup END
+  -- ]])
 
   -- Auto reload content changed outside
   vim.cmd([[
@@ -122,7 +139,6 @@ function M.setup()
     autocmd FileChangedShellPost *
       \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
   augroup END
-  noremap ]s <cmd>lua require'spellsitter'.nav()<cr>
   ]])
 
   -- Disable automatic comment in newline
@@ -143,9 +159,9 @@ function M.setup()
   autocmd FileType * lua require('user.plugins.treesitter_handler').assign_fold()
   ]])
 
-  vim.g.did_load_filetypes = 1
-  vim.cmd([[ runtime! ftdetect/*.vim]])
-  vim.cmd([[runtime! ftdetect/*.lua]])
+  -- vim.g.did_load_filetypes = 1
+  -- vim.cmd([[ runtime! ftdetect/*.vim]])
+  -- vim.cmd([[runtime! ftdetect/*.lua]])
 end
 
 function M.setup_builtin()
@@ -179,7 +195,7 @@ end
 --- Register filetype setup
 ---@param filetype string
 ---@param label string
----@param func string
+---@param func any
 function M.register_filetype(filetype, label, func)
   if not M.filetype_setups[filetype] then
     M.filetype_setups[filetype] = {}

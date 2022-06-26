@@ -9,6 +9,7 @@ function M.init(use, plugin_fn)
     M.repo,
     event = 'BufRead',
     config = plugin_fn('setup'),
+    requires = { 'anuvyklack/nvim-keymap-amend' }
   })
 
   M.is_init = true

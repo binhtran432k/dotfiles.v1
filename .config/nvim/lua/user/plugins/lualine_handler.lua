@@ -17,7 +17,8 @@ function M.init(use, plugin_fn)
     requires = dependencies_handler.web_devicons,
     config = plugin_fn('setup'),
   })
-  M.is_init = true
+
+  M.is_init = true and not _G.is_readonly_mode
 end
 
 function M.setup()
@@ -52,9 +53,9 @@ function M.setup()
     options = {
       icons_enabled = true,
       theme = 'auto',
-      component_separators = { left = '│', right = '│' },
+      -- component_separators = { left = '│', right = '│' },
       -- section_separators = { left = '▒', right = '▒' },
-      section_separators = { left = '', right = '' },
+      -- section_separators = { left = '', right = '' },
       disabled_filetypes = { 'alpha' },
       always_divide_middle = true,
     },
@@ -63,17 +64,26 @@ function M.setup()
       lualine_b = {
         gitsigns.get_lualine_branch(trunc(nil, nil, 60)),
         gitsigns.get_lualine_diff(trunc(nil, nil, 120)),
-        { 'diagnostics', fmt = trunc(nil, nil, 100) },
+        {
+          'diagnostics',
+          fmt = trunc(nil, nil, 60),
+          symbols = {
+            hint = ' ',
+            info = ' ',
+            warn = ' ',
+            error = ' ',
+          },
+        },
       },
       lualine_c = {
-        'filename',
+        { 'filename', fmt = trunc(60, 20, nil, true) },
         -- gps.get_lualine(trunc(nil, nil, 120)),
       },
       lualine_x = {
         lsp_config.get_lualine(trunc(nil, nil, 120)),
         { 'encoding', fmt = trunc(nil, nil, 80) },
         { 'fileformat', fmt = trunc(nil, nil, 80) },
-        { 'filetype', fmt = trunc(90, 30, 50), icons_enabled = false},
+        { 'filetype', fmt = trunc(90, 30, 50), icons_enabled = false },
       },
       lualine_y = {},
       lualine_z = { M.get_custom_location() },

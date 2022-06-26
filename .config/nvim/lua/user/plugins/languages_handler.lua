@@ -1,18 +1,14 @@
--- cSpell:ignore preservim aklt MTDL9
 local M = {}
 
 M.is_init = false
 
 function M.init(use, _)
   use({
-    -- {
-    --   'preservim/vim-markdown',
-    --   ft = { 'markdown' },
-    -- },
-    { 'aklt/plantuml-syntax', ft = { 'plantuml' } },
+    { 'aklt/plantuml-syntax', ft = { 'plantuml', 'markdown' } },
     { 'MTDL9/vim-log-highlighting', ft = { 'log' } },
     { 'tfnico/vim-gradle', ft = { 'groovy' } },
     { 'SirJson/fzf-gitignore', ft = { 'gitignore' } },
+    { '~/.config/nvim/testplugin/vim-restclient-syntax', ft = { 'http' } },
   })
 
   M.is_init = true

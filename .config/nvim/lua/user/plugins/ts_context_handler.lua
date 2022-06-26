@@ -3,8 +3,7 @@ local treesitter = require('user.plugins.treesitter_handler')
 
 local M = {}
 
--- M.repo = 'romgrk/nvim-treesitter-context'
-M.repo = '/home/binhtran432k/.config/nvim/testplugin/nvim-treesitter-context'
+M.repo = 'nvim-treesitter/nvim-treesitter-context'
 M.is_init = false
 
 function M.init(use, plugin_fn)
@@ -29,10 +28,6 @@ function M.setup()
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-    line_numbers = true,
-    fake_relative_number = true,
-    auto_scroll_off = true,
-    scroll_off = nil,
     patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
       -- For all filetypes
       -- Note that setting an entry here replaces all other patterns for this entry.
@@ -43,13 +38,14 @@ function M.setup()
         'function',
         'method',
         'for', -- These won't appear in the context
-        'do',
         'while',
         'if',
+        'elseif',
         'else',
         'switch',
         'case',
       },
+
       -- Example for a specific filetype.
       -- If a pattern is missing, *open a PR* so everyone can benefit.
       -- rust = {
@@ -61,11 +57,16 @@ function M.setup()
       -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
       -- exactly match "impl_item" only)
       -- rust = true,
-    },
+    }
   })
+end
 
+function M.update_highlight()
   -- Change highlight context
-  vim.cmd([[highlight link TreesitterContext CursorLine]])
+  vim.cmd([[
+  highlight link TreesitterContext CursorLine
+  highlight link TreesitterContextLineNumber TSWarning
+  ]])
 end
 
 return M

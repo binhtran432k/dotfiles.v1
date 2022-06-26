@@ -45,8 +45,6 @@ function M.setup()
     },
     exclude = {}, -- table: groups you don't want to clear
   })
-
-  vim.cmd('highlight! default link Visual QuickFixLine')
 end
 
 return M

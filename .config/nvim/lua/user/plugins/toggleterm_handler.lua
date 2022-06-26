@@ -23,7 +23,7 @@ function M.init(use, plugin_fn)
   })
 
   M.plugin_fn = plugin_fn
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { key = true, which_key = true }
 end
@@ -33,23 +33,25 @@ function M.setup()
     return
   end
 
-  ---@diagnostic disable-next-line: different-requires
   local toggleterm = require('toggleterm')
-  ---@diagnostic disable-next-line: redundant-parameter
   toggleterm.setup({
-    size = 18,
+    size = function(term)
+      if term.direction == "horizontal" then
+        return 15
+      elseif term.direction == "vertical" then
+        return vim.o.columns * 0.4
+      end
+    end,
     -- size = vim.o.columns * 0.4,
-    open_mapping = [[<M-1>]],
+    open_mapping = [[<C-\>]],
     hide_numbers = true,
     shade_filetypes = {},
     shade_terminals = false,
     -- shading_factor = 2,
-    start_in_insert = true,
+    start_in_insert = false,
     insert_mappings = true,
-    persist_size = true,
-    -- direction = 'float',
-    direction = 'tab',
-    -- direction = 'vertical',
+    persist_size = false,
+    direction = 'horizontal', -- float, tab, vertical, horizontal
     close_on_exit = true,
     shell = vim.o.shell,
     float_opts = {
@@ -62,9 +64,11 @@ function M.setup()
     },
   })
 
-  vim.cmd(
-    [[autocmd! TermOpen term://* lua require('user.plugins.toggleterm_handler').set_terminal_keymaps()]]
-  )
+  vim.cmd([[
+    autocmd! TermOpen term://* lua require('user.plugins.toggleterm_handler').set_terminal_keymaps()
+    autocmd! FileType toggleterm startinsert
+    " autocmd! WinEnter term://* startinsert
+    ]])
 
   M.setup_custom()
 end
@@ -75,7 +79,7 @@ function M.bind_keys()
   end
 
   local binds = {}
-  for i = 2, 3, 1 do
+  for i = 1, 3, 1 do
     binds[#binds + 1] = {
       key = string.format([[<M-%d>]], i),
       cmd = string.format([[<Cmd>exe "%dToggleTerm"<CR>]], i),
@@ -104,9 +108,9 @@ function M.bind_which_keys()
   end
 
   local term_maps = {
-    ['<M-1>'] = 'Toggle Current Terminal',
+    ['<C-\\>'] = 'Toggle Current Terminal',
   }
-  for i = 2, 3, 1 do
+  for i = 1, 3, 1 do
     term_maps[string.format([[<A-%d>]], i)] = string.format(
       'Toggle Terminal %d',
       i
@@ -206,13 +210,13 @@ function M.setup_custom()
   local Terminal = require('toggleterm.terminal').Terminal
   M.lazygit_term = Terminal:new({
     cmd = 'lazygit',
-    direction = 'tab',
-    count = 4,
+    direction = 'float',
+    id = 1000,
   })
   M.ranger_term = Terminal:new({
     cmd = 'ranger',
-    direction = 'tab',
-    count = 5,
+    direction = 'float',
+    id = 1001,
   })
 
   M.lazygit_toggle = M._lazygit_toggle
@@ -232,13 +236,19 @@ function M.setup_custom()
     {
       mode = 't',
       key = [[<M-4>]],
-      cmd = string.format([[<C-\><C-n><cmd>lua %s<CR>]], M.plugin_fn('lazygit_toggle')),
+      cmd = string.format(
+        [[<C-\><C-n><cmd>lua %s<CR>]],
+        M.plugin_fn('lazygit_toggle')
+      ),
       opt = { silent = true },
     },
     {
       mode = 't',
       key = [[<M-5>]],
-      cmd = string.format([[<C-\><C-n><cmd>lua %s<CR>]], M.plugin_fn('ranger_toggle')),
+      cmd = string.format(
+        [[<C-\><C-n><cmd>lua %s<CR>]],
+        M.plugin_fn('ranger_toggle')
+      ),
       opt = { silent = true },
     },
   }

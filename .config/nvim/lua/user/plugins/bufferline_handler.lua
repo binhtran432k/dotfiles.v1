@@ -16,7 +16,7 @@ function M.init(use, plugin_fn)
     config = plugin_fn('setup'),
   })
 
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { key = true, which_key = true }
 end
@@ -27,7 +27,6 @@ function M.setup()
   end
 
   local bufferline = require('bufferline')
-  ---@diagnostic disable-next-line: redundant-parameter
   bufferline.setup({
     options = {
       offsets = {
@@ -38,8 +37,13 @@ function M.setup()
           text_align = 'left',
         },
       },
+      diagnostics = 'nvim_lsp', -- false | "nvim_lsp" | "coc"
     },
   })
+
+  vim.cmd([[
+  command! BufferOnly silent! execute "%bd|e#|bd#"
+  ]])
 end
 
 function M.bind_keys()
@@ -91,6 +95,11 @@ function M.bind_keys()
       cmd = '<Cmd>lua require("bufferline").sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>',
       opt = { silent = true },
     },
+    {
+      key = '<leader>ba',
+      cmd = '<Cmd>BufferOnly<CR>',
+      opt = { silent = true },
+    },
   }
 
   mappings.bind_keys(binds)
@@ -110,6 +119,7 @@ function M.bind_which_keys()
         [']B'] = 'Move next BufferLine',
         ['<leader>b'] = {
           name = 'BufferLine',
+          a = 'Buffer only current',
           b = 'Bufferline Pick',
           e = 'Sort buffer by extension',
           d = 'Sort buffer by directory',

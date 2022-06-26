@@ -1,6 +1,5 @@
 -- cSpell:ignore norcalli RRGGBB RRGGBBAA
 local which_key = require('user.plugins.which-key_handler')
-local treesitter = require('user.plugins.treesitter_handler')
 
 local M = {}
 
@@ -10,12 +9,11 @@ M.is_init = false
 function M.init(use, plugin_fn)
   use({
     M.repo,
-    after = treesitter.name,
     config = plugin_fn('setup'),
     keys = { 'gc', 'gb' },
   })
 
-  M.is_init = true
+  M.is_init = true and not _G.is_readonly_mode
 
   return { which_key = true }
 end
