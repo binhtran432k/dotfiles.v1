@@ -74,10 +74,10 @@ XTerm*selectToClipboard: true
 *.color7:     			  #BFBFBF
 *.color15:    			  #E6E6E6
 
-Xcursor.theme: capitaine-cursors-light
+Xcursor.theme: Dracula-cursors
 Xcursor.size:                     0
 
-URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
+URxvt.font:                       9x15,xft:DelugiaBook
 
 ! alternative font settings with 'terminus':
 ! URxvt.font:      -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso10646-1
