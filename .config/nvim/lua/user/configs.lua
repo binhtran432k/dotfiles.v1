@@ -115,9 +115,9 @@ function M.setup_all(options)
   vim.cmd([[
   augroup remember_last_jump
     autocmd!
-    autocmd BufWinLeave *.* if &ma == 1 && &ft !=# 'help' | mkview | endif
-    autocmd BufWritePost *.* if &ma == 1 && &ft !=# 'help' | mkview | endif
-    autocmd BufWinEnter *.* if &ft !=# 'help' | silent! loadview | endif
+    autocmd BufWinLeave * if &ma == 1 && &ft !=# 'help' | mkview | endif
+    autocmd BufWritePost * if &ma == 1 && &ft !=# 'help' | mkview | endif
+    autocmd BufWinEnter * if &ft !=# 'help' | silent! loadview | endif
   augroup END
   ]])
   -- vim.cmd([[
