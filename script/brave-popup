@@ -2,4 +2,7 @@
 
 if [[ -f /usr/bin/brave ]]; then
     brave --app=$@
+    exit 0
 fi
+
+exit 2
