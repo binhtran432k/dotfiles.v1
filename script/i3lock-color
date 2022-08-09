@@ -22,47 +22,51 @@ font='Noto Sans'
 
 
 # lock the screen
-i3lock \
-  --insidever-color=$base02$alpha \
-  --insidewrong-color=$base02$alpha \
-  --inside-color=$base02$alpha \
-  --ringver-color=$green$alpha \
-  --ringwrong-color=$red$alpha \
-  --ringver-color=$green$alpha \
-  --ringwrong-color=$red$alpha \
-  --ring-color=$blue$alpha \
-  --line-uses-ring \
-  --keyhl-color=$magenta$alpha \
-  --bshl-color=$orange$alpha \
-  --separator-color=$base01$alpha \
-  --verif-color=$green \
-  --wrong-color=$red \
-  --layout-color=$blue \
-  --date-color=$blue \
-  --time-color=$blue \
-  --clock \
-  --blur=5 \
-  --indicator \
-  --time-str="%H:%M:%S" \
-  --date-str="%A, %Y-%m-%d" \
-  --verif-text="Verifying..." \
-  --wrong-text="Auth Failed" \
-  --noinput="No Input" \
-  --lock-text="Locking..." \
-  --lockfailed="Lock Failed" \
-  --time-font=$font \
-  --date-font=$font \
-  --layout-font=$font \
-  --verif-font=$font \
-  --wrong-font=$font \
-  --radius=150 \
-  --ring-width=20 \
-  --time-size=50 \
-  --date-size=20 \
-  --pass-media-keys \
-  --pass-screen-keys \
-  --pass-volume-keys \
-  --ignore-empty-password $@
+
+RESOLUTION=$(xrandr -q|sed -n 's/.*current[ ]\([0-9]*\) x \([0-9]*\),.*/\1x\2/p')
+
+# lock the screen
+import -silent -window root jpeg:- | convert - -scale 20% -blur 0x2.5 -resize 500% RGB:- | \
+  i3lock \
+    --insidever-color=$base02$alpha \
+    --insidewrong-color=$base02$alpha \
+    --inside-color=$base02$alpha \
+    --ringver-color=$green$alpha \
+    --ringwrong-color=$red$alpha \
+    --ringver-color=$green$alpha \
+    --ringwrong-color=$red$alpha \
+    --ring-color=$blue$alpha \
+    --line-uses-ring \
+    --keyhl-color=$magenta$alpha \
+    --bshl-color=$orange$alpha \
+    --separator-color=$base01$alpha \
+    --verif-color=$green \
+    --wrong-color=$red \
+    --layout-color=$blue \
+    --date-color=$blue \
+    --time-color=$blue \
+    --clock \
+    --time-str="%H:%M:%S" \
+    --date-str="%A, %Y-%m-%d" \
+    --verif-text="Verifying..." \
+    --wrong-text="Auth Failed" \
+    --noinput="No Input" \
+    --lock-text="Locking..." \
+    --lockfailed="Lock Failed" \
+    --time-font=$font \
+    --date-font=$font \
+    --layout-font=$font \
+    --verif-font=$font \
+    --wrong-font=$font \
+    --radius=150 \
+    --ring-width=20 \
+    --time-size=50 \
+    --date-size=20 \
+    --pass-media-keys \
+    --pass-screen-keys \
+    --pass-volume-keys \
+    --ignore-empty-password \
+    --raw $RESOLUTION:rgb -i /dev/stdin -e $@
 
 # sleep 1 adds a small delay to prevent possible race conditions with suspend
 #sleep 1
