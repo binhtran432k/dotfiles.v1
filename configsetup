@@ -1,0 +1,100 @@
+#!/bin/bash
+
+xdg_configs=( nvim i3 i3status i3status-rust dunst kitty ranger pulseaudio-ctl
+  polybar conky geoclue Kvantum zathura dmenu-recent btop ncmpcpp mpd neofetch
+  morc_menu qutebrowser msmtp picom.conf redshift.conf QTalarm qt5ct awesome
+  shalarm vimiv wezterm )
+configs=( .zshrc .profile .gitconfig .Xresources .dmenurc .dir_colors .fonts)
+scripts=( brave-popup simplescrot shalarm i3lock-color )
+
+src=$(pwd)
+xdg_config_src=$src/.config
+config_src=$src
+script_src=$src/script
+
+xdg_config_out=~/.config
+config_out=~
+script_out=~/.local/bin
+
+uninstall_configs() {
+  for i in ${configs[@]}; do
+    rm -rf "$config_out/$i"
+  done
+
+  for i in ${xdg_configs[@]}; do
+    rm -rf "$xdg_config_out/$i"
+  done
+}
+
+uninstall_scripts() {
+  for i in ${scripts[@]}; do
+    rm -rf "$script_out/$i"
+  done
+}
+
+install_configs() {
+  for i in ${configs[@]}; do
+    ln -snf "$config_src/$i" "$config_out/$i"
+  done
+
+  mkdir -p "$xdg_config_out/"
+  for i in ${xdg_configs[@]}; do
+    ln -snf "$xdg_config_src/$i" "$xdg_config_out/$i"
+  done
+}
+
+install_scripts() {
+  mkdir -p "$script_out/"
+  for i in ${scripts[@]}; do
+    chmod +x "$script_src/$i"
+    ln -snf "$script_src/$i" "$script_out/$i"
+  done
+}
+
+process_install() {
+  process_uninstall
+  echo "Installing config..."
+  install_scripts
+  install_configs
+  echo "Install complete"
+}
+
+process_uninstall() {
+  echo "Uninstalling config..."
+  uninstall_scripts
+  uninstall_configs
+  echo "Uninstall complete"
+}
+
+process_help() {
+  echo "A script to setup config."
+  echo
+  echo "Syntax: configsetup [-i|u|h]"
+  echo "options:"
+  echo "i     Install config."
+  echo "u     Uninstall config."
+  echo "h     Print this Help."
+  echo
+}
+
+if [[ "$#" -eq 0 ]]; then
+  process_help
+  exit 0
+fi
+
+while getopts ":hiu" option; do
+  case $option in
+    h) # display HELP
+      process_help
+      exit 0;;
+    i) # install config
+      process_install
+      exit 0;;
+    u) # uninstall config
+      process_uninstall
+      exit 0;;
+    \?) # invalid option
+      echo "Error: Invalid option"
+      exit 1;;
+  esac
+done
