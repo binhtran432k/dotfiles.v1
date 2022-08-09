@@ -1,0 +1,18 @@
+[
+  (list)
+  (fn)
+  (lambda)
+  (hashfn)
+  (match)
+  (let)
+  (global)
+  (local)
+  (var)
+  (set)
+  (each)
+  (collect)
+  (icollect)
+  (accumulate)
+  (for)
+  (quote)
+] @fold
