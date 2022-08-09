@@ -95,9 +95,7 @@ info_fg = "#282A36"
 
 [[block]]
 block = "sound"
-driver = "pulseaudio"
 on_click = "pavucontrol"
-format = "{volume}"
 headphones_indicator = true
 
 [[block]]
