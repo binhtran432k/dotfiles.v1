@@ -494,18 +494,17 @@ mode "$mode_gaps_outer" {
 }
 
 # volume keys
-# bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up 5
-# bindsym XF86AudioLowerVolume exec pulseaudio-ctl down 5
-# bindsym XF86AudioMute exec pulseaudio-ctl mute toggle
-#
-# bindsym Ctrl+Up exec pulseaudio-ctl up 5
-# bindsym Ctrl+Down exec pulseaudio-ctl down 5
+#set $audio_up pulseaudio-ctl up 5
+#set $audio_down pulseaudio-ctl down 5
+#set $audio_toggle pulseaudio-ctl mute toggle
+set $audio_up pactl set-sink-volume @DEFAULT_SINK@ +5%
+set $audio_down pactl set-sink-volume @DEFAULT_SINK@ -5%
+set $audio_toggle pactl set-sink-mute @DEFAULT_SINK@ toggle
 
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-
-bindsym Ctrl+Down exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym Ctrl+Up exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id $audio_up
+bindsym XF86AudioLowerVolume exec --no-startup-id $audio_down
+bindsym XF86AudioMute exec --no-startup-id $audio_toggle
+bindsym Ctrl+Up exec --no-startup-id $audio_up
+bindsym Ctrl+Down exec --no-startup-id $audio_down
 
 # vim:ft=config
