@@ -8,7 +8,7 @@ set $font_size 12
 set $bar_height 21
 set $i3exit i3exit
 set $i3lock blurlock
-set $i3scrot i3scrot
+set $i3scrot simplescrot
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
