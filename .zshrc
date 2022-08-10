@@ -32,19 +32,15 @@ extend_env()
     fi
 }
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-source_zsh_plugin_file "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-
-# Use powerline
-USE_POWERLINE="true"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-source_zsh_plugin_file "$HOME/.p10k.zsh"
+# Source manjaro-zsh-configuration
+source_zsh_plugin /usr/share/zsh/manjaro-zsh-config
+# Use manjaro zsh prompt
+#source_zsh_plugin /usr/share/zsh/manjaro-zsh-prompt
+# Use zsh vi mode
+source_zsh_plugin_file /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Default terminal
-replace_env TERMINAL /usr/bin/wezterm
+replace_env TERMINAL /usr/bin/kitty
 # Default browser
 replace_env BROWSER /usr/bin/brave
 # Make vim as default editor in terminal
@@ -102,3 +98,6 @@ colors() {
 
 # Make ranger source directory
 alias sclear="printf '\033[2J\033[3J\033[1;1H'"
+
+# Call starship
+eval "$(starship init zsh)"
