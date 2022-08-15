@@ -1,0 +1,34 @@
+sort=-time
+layer=overlay
+text-color=#f8f8f2
+background-color=#282a36
+width=300
+height=110
+border-size=2
+border-color=#bd93f9
+border-radius=10
+icons=1
+max-icon-size=64
+default-timeout=3000
+ignore-timeout=1
+font=Delugia 12
+
+[urgency=low]
+border-color=#6272a4
+
+[urgency=normal]
+border-color=#bd93f9
+
+[urgency=critical]
+border-color=#ff5555
+default-timeout=0
+
+[urgency=high]
+border-color=#ff5555
+default-timeout=0
+
+[category=mpd]
+default-timeout=500
+group-by=category
+
+# vim:ft=cfg:
