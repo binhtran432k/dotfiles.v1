@@ -1,0 +1,26 @@
+#!/bin/bash
+engines=("$@")
+engine_num=${#engines[@]}
+if [[ $engine_num == 0 ]]; then
+    echo "No engine provided"
+    exit 2
+fi
+
+current_engine=$(ibus engine)
+for (( i=0; i<$engine_num; i++ ));
+do
+    if [[ ${engines[$i]} == $current_engine ]]; then
+        next_index=$(expr $i + 1)
+        next_index=$(expr $next_index % $engine_num)
+        next_engine=${engines[$next_index]}
+        break
+    fi
+done
+
+if [[ -z $next_engine ]]; then
+    echo "Engine not in list"
+    next_engine=${engines[0]}
+fi
+
+ibus engine $next_engine
+exit 0
