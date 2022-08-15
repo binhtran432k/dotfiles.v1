@@ -5,12 +5,12 @@ export BROWSER=/usr/bin/brave
 export EDITOR=/usr/bin/nvim
 
 # Setup ibus
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT4_IM_MODULE=ibus
-export CLUTTER_IM_MODULE=ibus
-export GLFW_IM_MODULE=ibus
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export QT4_IM_MODULE=fcitx
+export CLUTTER_IM_MODULE=fcitx
+export GLFW_IM_MODULE=fcitx
 
 # Setup tbsm
 # [[ -n "$XDG_VTNR" && $XDG_VTNR -le 2 ]] && exec tbsm

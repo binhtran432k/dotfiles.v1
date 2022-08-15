@@ -27,7 +27,10 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # ibus
-exec "XDG_CURRENT_DESKTOP=KDE ibus-daemon -drx"
+# exec "XDG_CURRENT_DESKTOP=KDE ibus-daemon -drx"
+
+# fcitx
+exec --no-startup-id fcitx5 -d
 
 # To set up colors, fonts, and other various things which programs
 # (like terminal emulator urxvt) read from X resources
@@ -84,6 +87,7 @@ output * bg ~/dotfiles/backgrounds/saitama-2.jpg fill
 exec swayidle -w \
          timeout 300 '$lock' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 1200 '$logind suspend' \
          before-sleep '$lock'
 
 ### Input configuration
@@ -225,9 +229,9 @@ input "type:keyboard" {
 #
 # Change input method:
 #
-set $vi_im Bamboo::Candy
-set $us_im BambooUs::Candy
-set $switch_im switch_ibus_engine $vi_im $us_im
+# set $vi_im Bamboo::Candy
+# set $us_im BambooUs::Candy
+# set $switch_im switch_ibus_engine $vi_im $us_im
 # set $im "im: (v)ietnamese (u)s"
 # mode $im {
 #     bindsym v exec ibus engine $vi_im, mode "default"
@@ -240,7 +244,7 @@ set $switch_im switch_ibus_engine $vi_im $us_im
 #     bindsym Escape mode "default"
 # }
 # bindsym $mod+i mode $im
-bindsym $mod+i exec $switch_im
+# bindsym $mod+i exec $switch_im
 #
 # Resizing containers:
 #
@@ -339,9 +343,11 @@ bindsym XF86Search exec $menu
 bindsym Ctrl+Up exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym Ctrl+Down exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 # Screenshot
-set $screenshot_path ~/Pictures/screenshots/$(date -u +"%Y-%m-%d_%H-%M-%S").png
+set $screenshot_path ~/Pictures/$(date -u +"%Y-%m-%d_%H-%M-%S").png
 bindsym --release Print exec grimshot save output $screenshot_path
 bindsym --release Control+Print exec grimshot copy output
+bindsym --release $mod+Print exec grimshot save area $screenshot_path
+bindsym --release Control+$mod+Print exec grimshot copy area
 bindsym --release Shift+Print exec grimshot save window $screenshot_path
 bindsym --release Control+Shift+Print exec grimshot copy window
 
