@@ -1,9 +1,3 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -18,16 +12,56 @@ set $term wezterm
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu my_dmenu_recency
 set $logind systemctl
-set $lock swaylock -f -c 282A36f0
-set $scrot simplescrot
+set $lock swaylock
+
+### Startup programs
+#
+# hot plug monitor support
+#exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
+
+# fix GTK apps slow startup
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# ibus
+exec "XDG_CURRENT_DESKTOP=KDE ibus-daemon -drx"
+
+# To set up colors, fonts, and other various things which programs
+# (like terminal emulator urxvt) read from X resources
+exec --no-startup-id "xrdb ~/.Xresources"
+
+# network manager applet
+exec nm-applet --indicator
+
+# nightlight
+# exec gammastep-indicator -t 5700:3500
+set $lat 10.8326
+set $long 106.6581
+exec_always killall wlsunset && wlsunset -t 3500 -T 5900 -l $lat -L $long
+
+# Music
+exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd & mpDris2
+
+# notification daemon
+exec mako
+
+# polkit (used for authentication)
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+### Fonts
+#
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:Delugia Book 12
 
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/dotfiles/backgrounds/saitama-2.jpg fill
 #
 # Example configuration:
 #
@@ -66,6 +100,7 @@ exec swayidle -w \
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "type:touchpad" {
+    dwt enabled
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
@@ -173,6 +208,8 @@ input "type:keyboard" {
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+
+    bindsym $mod+c focus child
 #
 # Scratchpad:
 #
@@ -185,6 +222,25 @@ input "type:keyboard" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+#
+# Change input method:
+#
+set $vi_im Bamboo::Candy
+set $us_im BambooUs::Candy
+set $switch_im switch_ibus_engine $vi_im $us_im
+# set $im "im: (v)ietnamese (u)s"
+# mode $im {
+#     bindsym v exec ibus engine $vi_im, mode "default"
+#     bindsym u exec ibus engine $us_im, mode "default"
+#
+#     # Return to default mode
+#     bindsym $mod+i exec $switch_im, mode "default"
+#     bindsym Ctrl+bracketleft mode "default"
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+# bindsym $mod+i mode $im
+bindsym $mod+i exec $switch_im
 #
 # Resizing containers:
 #
@@ -211,7 +267,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
 #
 # Set shut down, restart and locking features
 #
@@ -223,7 +278,7 @@ mode "$mode_system" {
     bindsym e exec --no-startup-id swaymsg exit, mode "default"
     bindsym h exec --no-startup-id $logind hibernate, mode "default"
     bindsym r exec --no-startup-id $logind reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id $logind shutdown, mode "default"
+    bindsym Shift+s exec --no-startup-id $logind poweroff, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Ctrl+bracketleft mode "default"
@@ -233,11 +288,10 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+0 mode "$mode_system"
-
 #
 # Scrot image
 #
-set $mode_scrot Scrot: (f)ull_screen, (s)elect, (w)indow
+set $mode_scrot scrot: (f)ull_screen, (s)elect, (w)indow
 mode "$mode_scrot" {
     bindsym f exec --no-startup-id $scrot, mode "default"
     bindsym w --release exec --no-startup-id $scrot -w, mode "default"
@@ -249,11 +303,10 @@ mode "$mode_scrot" {
     bindsym Escape mode "default"
 }
 bindsym $mod+p mode "$mode_scrot"
-
 #
 # Open launcher
 #
-set $mode_launcher Launch: (b)rave (t)hunderbird pamac-(m)anager
+set $mode_launcher launch: (b)rave (t)hunderbird pamac-(m)anager
 mode "$mode_launcher" {
     bindsym b exec brave, mode "default"
     bindsym t exec thunderbird, mode "default"
@@ -265,13 +318,10 @@ mode "$mode_launcher" {
     bindsym Return mode "default"
 }
 bindsym $mod+o mode "$mode_launcher"
-
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
-
 # Lock screen
 bindsym $mod+9 exec --no-startup-id $lock
-
 #
 # XF86
 #
@@ -285,32 +335,39 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec $menu
-# Custom
+# Custom Volume
 bindsym Ctrl+Up exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym Ctrl+Down exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# Screenshot
+set $screenshot_path ~/Pictures/screenshots/$(date -u +"%Y-%m-%d_%H-%M-%S").png
+bindsym --release Print exec grimshot save output $screenshot_path
+bindsym --release Control+Print exec grimshot copy output
+bindsym --release Shift+Print exec grimshot save window $screenshot_path
+bindsym --release Control+Shift+Print exec grimshot copy window
 
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-    font pango:Delugia Book, FontAwesome $font_size
-    status_command i3status-rs
-
-    strip_workspace_numbers yes
-
-    colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
-
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
-    }
+    # position top
+    # font pango:Delugia Book, FontAwesome $font_size
+    # status_command i3status-rs
+    #
+    # strip_workspace_numbers yes
+    #
+    # colors {
+    #     background #282A36
+    #     statusline #F8F8F2
+    #     separator  #44475A
+    #
+    #     focused_workspace  #44475A #44475A #F8F8F2
+    #     active_workspace   #282A36 #44475A #F8F8F2
+    #     inactive_workspace #282A36 #282A36 #BFBFBF
+    #     urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    #     binding_mode       #FF5555 #FF5555 #F8F8F2
+    # }
+    swaybar_command waybar
 }
 
 # Theme colors
@@ -320,7 +377,24 @@ client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-
 client.background       #F8F8F2
+
+# Makes it so that you need to click on a window for it to have focus.
+focus_follows_mouse no
+
+# With this, trying to switch to a workspace that you are on already
+# sends you to your last one instead.
+workspace_auto_back_and_forth yes
+
+# Gaps
+#smart_gaps on
+gaps inner 10
+
+# Border
+
+set $border_size 5
+for_window [class=".*"] border pixel $border_size
+default_border pixel $border_size
+default_floating_border pixel $border_size
 
 include /etc/sway/config.d/*
