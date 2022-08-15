@@ -1,0 +1,131 @@
+* {
+  font-size: 18;
+  font-family: "Delugia Book";
+}
+
+#memory,
+#temperature {
+  font-size: 14;
+  font-family: "Font Awesome 6 Free";
+}
+
+window#waybar {
+  background: #282a36;
+  color: #f8f8f2;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk,
+#network,
+#backlight,
+#temperature,
+#idle_inhibitor {
+  margin: 0 3px;
+  padding: 0 5px;
+}
+
+#workspaces {
+  margin-right: 3px;
+}
+
+#tray {
+  padding-left: 8px;
+  margin-left: 3px;
+}
+
+#custom-mpris_prev {
+  padding-left: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#custom-mpris_play_pause {
+  padding-right: 5px;
+}
+
+#custom-mpris_next {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-right: 3px;
+}
+
+#workspaces button {
+  padding: 0 2px;
+  color: #6272a4;
+  box-shadow: inset 0 -3px transparent;
+}
+
+#workspaces button:hover {
+  background-color: #abb2bf;
+  color: #191a21;
+}
+
+#workspaces button.focused {
+  color: #f8f8f2;
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  color: #ff6e6e;
+}
+
+#memory {
+  color: #50fa7b;
+}
+#battery {
+  color: #50fa7b;
+}
+#disk {
+  color: #ff79c6;
+}
+
+#memory.warning,
+#battery.warning,
+#disk.warning {
+  color: #191a21;
+  background: #f1fa8c;
+}
+
+#memory.critical,
+#battery.critical,
+#disk.critical {
+  color: #191a21;
+  background: #ff5555;
+}
+
+#cpu {
+  color: #bd93f9;
+}
+
+#temperature {
+  color: #ffb86c;
+}
+
+#backlight {
+  color: #f1fa8c;
+}
+
+#network {
+  color: #8be9fd;
+}
+
+#pulseaudio {
+    color: #8be9fd
+}
+#pulseaudio.muted {
+    color: #ff5555
+}
+
+#custom-mpris_prev,
+#custom-mpris_play_pause,
+#custom-mpris_next {
+  color: #ff79c6;
+}
+
+#idle_inhibitor.activated {
+  color: #ffb86c;
+}
