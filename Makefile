@@ -20,3 +20,7 @@ sleep: cleansleep
 	sudo chmod u+x /lib/systemd/system-sleep/xhci.sh
 cleansleep:
 	sudo rm -f /lib/systemd/system-sleep/xhci.sh
+nobeep:
+	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+cleannobeep:
+	sudo rm -f /etc/modprobe.d/nobeep.conf
