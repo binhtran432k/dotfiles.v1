@@ -295,11 +295,15 @@ bindsym $mod+0 mode "$mode_system"
 #
 # Scrot image
 #
-set $mode_scrot scrot: (f)ull_screen, (s)elect, (w)indow
+set $screenshot_path ~/Pictures/$(date -u +"%Y-%m-%d_%H-%M-%S").png
+set $mode_scrot shot: (f)ull_screen, (s)elect, (w)indow
 mode "$mode_scrot" {
-    bindsym f exec --no-startup-id $scrot, mode "default"
-    bindsym w --release exec --no-startup-id $scrot -w, mode "default"
-    bindsym s --release exec --no-startup-id $scrot -s, mode "default"
+    bindsym --release f exec grimshot save output $screenshot_path
+    bindsym --release Shift+f exec grimshot copy output
+    bindsym --release w exec grimshot save window $screenshot_path
+    bindsym --release Shift+w exec grimshot copy window
+    bindsym s exec grimshot save area $screenshot_path
+    bindsym Shift+s exec grimshot copy area
 
     bindsym $mod+p mode "default"
     bindsym Ctrl+bracketleft mode "default"
@@ -307,6 +311,12 @@ mode "$mode_scrot" {
     bindsym Escape mode "default"
 }
 bindsym $mod+p mode "$mode_scrot"
+bindsym --release Print exec grimshot save output $screenshot_path
+bindsym --release Control+Print exec grimshot copy output
+bindsym --release Shift+Print exec grimshot save window $screenshot_path
+bindsym --release Control+Shift+Print exec grimshot copy window
+bindsym $mod+Print exec grimshot save area $screenshot_path
+bindsym Control+$mod+Print exec grimshot copy area
 #
 # Open launcher
 #
@@ -342,14 +352,6 @@ bindsym XF86Search exec $menu
 # Custom Volume
 bindsym Ctrl+Up exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym Ctrl+Down exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-# Screenshot
-set $screenshot_path ~/Pictures/$(date -u +"%Y-%m-%d_%H-%M-%S").png
-bindsym --release Print exec grimshot save output $screenshot_path
-bindsym --release Control+Print exec grimshot copy output
-bindsym --release $mod+Print exec grimshot save area $screenshot_path
-bindsym --release Control+$mod+Print exec grimshot copy area
-bindsym --release Shift+Print exec grimshot save window $screenshot_path
-bindsym --release Control+Shift+Print exec grimshot copy window
 
 #
 # Status Bar:
