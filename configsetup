@@ -7,7 +7,7 @@ xdg_configs=( nvim i3 sway i3status i3status-rust dunst kitty ranger
 configs=( .zshrc .zprofile .profile .gitconfig .goldendict .Xresources .dmenurc
     .dir_colors .fonts )
 scripts=( brave-popup simplescrot shalarm i3lock-color switch_ibus_engine
-    switch_brightness my_dmenu_recency )
+    switch_brightness my_dmenu_recency sway-prop )
 
 src=$(pwd)
 xdg_config_src=$src/.config
