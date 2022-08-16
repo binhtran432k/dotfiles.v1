@@ -64,7 +64,7 @@ font pango:Delugia Book 12
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/dotfiles/backgrounds/saitama-2.jpg fill
+output * bg ~/dotfiles/backgrounds/sway/swaybg.png fill
 #
 # Example configuration:
 #
