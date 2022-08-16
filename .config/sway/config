@@ -30,11 +30,11 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # exec "XDG_CURRENT_DESKTOP=KDE ibus-daemon -drx"
 
 # fcitx
-exec --no-startup-id fcitx5 -d
+exec fcitx5 -dr
 
 # To set up colors, fonts, and other various things which programs
 # (like terminal emulator urxvt) read from X resources
-exec --no-startup-id "xrdb ~/.Xresources"
+exec xrdb -load ~/.Xresources
 
 # network manager applet
 exec nm-applet --indicator
