@@ -26,6 +26,9 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
+# load gtk themes
+exec_always import-gsettings
+
 # ibus
 # exec "XDG_CURRENT_DESKTOP=KDE ibus-daemon -drx"
 
@@ -38,6 +41,9 @@ exec xrdb -load ~/.Xresources
 
 # network manager applet
 exec nm-applet --indicator
+
+# bluetooth manager applet
+exec blueman-applet
 
 # nightlight
 # exec gammastep-indicator -t 5700:3500

@@ -1,0 +1,25 @@
+@define-color theme_selected_bg_color rgba(189, 147, 249, 1);
+@define-color selected_bg_color rgba(189, 147, 249, 1);
+@define-color theme_unfocused_selected_bg_color rgba(189, 147, 249, 1);
+@define-color unfocused_selected_bg_color rgba(189, 147, 249, 1);
+.window-frame {
+    box-shadow: none;
+    margin: 0;
+}
+
+/** Some apps use titlebar class and some window */
+.titlebar,
+window {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/** also remove shaddows */
+decoration {
+    box-shadow: none;
+}
+
+decoration:backdrop {
+    box-shadow: none;
+}
+
