@@ -334,6 +334,9 @@ bindsym XF86Search exec $menu
 # Custom Volume
 bindsym Ctrl+Up exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym Ctrl+Down exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# Custom Bindings
+bindsym $mod+F11 exec goldendict
+bindsym $mod+Shift+m exec playerctl play-pause
 
 #
 # Status Bar:
@@ -387,5 +390,9 @@ set $border_size 5
 for_window [class=".*"] border pixel $border_size
 default_border pixel $border_size
 default_floating_border pixel $border_size
+
+# Custom window style
+for_window [class="GoldenDict"] floating enable
+for_window [app_id="org.fcitx.fcitx5-config-qt"] floating enable
 
 include /etc/sway/config.d/*
