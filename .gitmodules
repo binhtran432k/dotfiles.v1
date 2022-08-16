@@ -7,3 +7,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:binhtran432k/nvim.git
+[submodule "themes/dracula"]
+	path = themes/dracula
+	url = https://github.com/dracula/gtk.git
