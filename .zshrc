@@ -119,6 +119,5 @@ if [ "$TERM" = "linux" ]; then
     printf %b '\e]P7f8f8f2'    # redefine 'white'          as 'dracula-fg'
     printf %b '\e]PFffffff'    # redefine 'bright-white'   as '#ffffff'
     clear
-else
-    eval "$(starship init zsh)"
 fi
+eval "$(starship init zsh)"
