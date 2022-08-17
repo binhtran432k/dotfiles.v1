@@ -9,7 +9,7 @@ border-color=#bd93f9
 border-radius=4
 icons=1
 max-icon-size=64
-default-timeout=3000
+default-timeout=5000
 ignore-timeout=1
 font=Delugia 12
 
@@ -28,7 +28,7 @@ border-color=#ff5555
 default-timeout=0
 
 [category=mpd]
-default-timeout=500
+default-timeout=2000
 group-by=category
 
 # vim:ft=cfg:
