@@ -15,3 +15,6 @@ export GLFW_IM_MODULE=fcitx
 
 # Setup tbsm
 # [[ -n "$XDG_VTNR" && $XDG_VTNR -le 2 ]] && exec tbsm
+
+# If running from tty1 manual start sway
+[ "$(tty)" = "/dev/tty1" ] && exec sway
