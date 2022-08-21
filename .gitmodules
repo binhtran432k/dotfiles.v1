@@ -10,3 +10,6 @@
 [submodule "themes/dracula"]
 	path = themes/dracula
 	url = https://github.com/dracula/gtk.git
+[submodule ".zplug"]
+	path = .zplug
+	url = https://github.com/zplug/zplug
