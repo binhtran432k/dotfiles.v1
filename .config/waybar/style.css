@@ -1,12 +1,6 @@
 * {
-  font-size: 18;
-  font-family: "Delugia Book";
-}
-
-#memory,
-#temperature {
-  font-size: 14;
-  font-family: "Font Awesome 6 Free";
+  font-size: 16;
+  font-family: "JetBrains Mono, Font Awesome 6 Free";
 }
 
 window#waybar {

@@ -94,10 +94,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}  {capacity}%",
-        "format-alt": "{icon}  {time}",
-        "format-charging": "  {capacity}%",
-        "format-plugged": "  {capacity}%",
+        "format": "{icon} {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
         "format-icons": [
             "",
             "",
