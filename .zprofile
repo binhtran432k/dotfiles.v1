@@ -23,6 +23,9 @@ export VISUAL=$EDITOR
 # Make hidden file on top with ls
 export LC_COLLATE="C"
 
+# Neovide
+export NEOVIDE_MULTIGRID=true
+
 # Setup tbsm
 # [[ -n "$XDG_VTNR" && $XDG_VTNR -le 2 ]] && exec tbsm
 
