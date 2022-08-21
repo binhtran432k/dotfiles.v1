@@ -1,3 +1,21 @@
+# [[[ zplug
+source ~/.zplug/init.zsh
+
+zplug "jeffreytse/zsh-vi-mode"
+zplug "zsh-users/zsh-autosuggestions"
+
+# Load theme file
+zplug 'dracula/zsh', as:theme
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+# ]]]
+
 private_source="$HOME/.private.sh"
 if [[ -r $private_source ]]; then
     source $private_source
@@ -32,8 +50,6 @@ extend_env()
     fi
 }
 
-source_zsh_plugin_file /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source_zsh_plugin_file /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source_zsh_plugin_file /usr/share/zsh/manjaro-zsh-config
 
 extend_env PATH "$HOME/.luarocks/bin"
@@ -83,4 +99,5 @@ alias lg=lazygit
 # Make ranger source directory
 alias sclear="printf '\033[2J\033[3J\033[1;1H'"
 
-eval "$(starship init zsh)"
+# Then, source plugins and add commands to $PATH
+zplug load
