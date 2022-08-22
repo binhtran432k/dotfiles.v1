@@ -1,19 +1,28 @@
-# [[[ zplug
-source ~/.zplug/init.zsh
+# [[[antigen
+source "$HOME/.antigen/antigen.zsh"
 
-zplug "jeffreytse/zsh-vi-mode"
-zplug "zsh-users/zsh-autosuggestions"
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-# Load theme file
-zplug 'dracula/zsh', as:theme
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle pip
+antigen bundle command-not-found
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Fish like autosuggestions
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Vi mode
+antigen bundle jeffreytse/zsh-vi-mode
+
+# Load the theme.
+antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply
 # ]]]
 
 private_source="$HOME/.private.sh"
@@ -99,5 +108,5 @@ alias lg=lazygit
 # Make ranger source directory
 alias sclear="printf '\033[2J\033[3J\033[1;1H'"
 
-# Then, source plugins and add commands to $PATH
-zplug load
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
