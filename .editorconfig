@@ -1,0 +1,4 @@
+root = true
+
+[.gitconfig]
+indent_style = tab
