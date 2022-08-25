@@ -4,7 +4,8 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export BROWSER=/usr/bin/brave
 export EDITOR=/usr/bin/nvim
-export TERMINAL=/usr/bin/wezterm
+export TERMINAL=/usr/bin/kitty
+export TERMINAL_CMD="$TERMINAL -e"
 
 # Setup ibus
 export GTK_IM_MODULE=fcitx

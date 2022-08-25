@@ -87,7 +87,7 @@
     "cpu": {
         "interval": 5,
         "format": " {usage}%",
-        "on-click-right": "wezterm start btop",
+        "on-click-right": "$TERMINAL_CMD btop",
     },
     "battery": {
         "states": {
@@ -153,7 +153,7 @@
         "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}}\", \"tooltip\": \" {{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
         "exec-if": "playerctl status",
         "on-click": "playerctl play-pause",
-        "on-click-right": "wezterm start ncmpcpp",
+        "on-click-right": "$TERMINAL_CMD ncmpcpp",
     },
     "custom/mpris_prev": {
         "format": "{icon}",
