@@ -15,3 +15,7 @@ class edir(Command):
 class lg(Command):
     def execute(self):
         self.fm.run('lazygit ' + self.rest(1))
+
+class v(Command):
+    def execute(self):
+        self.fm.run('nvim ' + self.rest(1))

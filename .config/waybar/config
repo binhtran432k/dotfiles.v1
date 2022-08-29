@@ -8,10 +8,10 @@
         "memory",
         "disk",
         "temperature",
-        "network",
+        "network"
     ],
     "modules-center": [
-        "clock",
+        "clock"
     ],
     "modules-right": [
         "custom/mpris_play_pause",
@@ -21,11 +21,10 @@
         "battery",
         "backlight",
         "idle_inhibitor",
-        "tray",
+        "tray"
     ],
     "sway/mode": {
-        "format": "{}",
-        "max-length": 999
+        "format": "{}"
     },
     "sway/workspaces": {
         "disable-scroll": true,
@@ -39,8 +38,15 @@
         }
     },
     "clock": {
-        "format": "{:%H:%M - %a, %b %d}",
-        "tooltip": false
+        "format": " {:%H:%M - %a, %b %d}",
+        "tooltip-format": "<span color='#50fa7b'><big>{:%Y %B}</big></span>\n<span color='#f8f8f2'><tt><small>{calendar}</small></tt></span>",
+        "format-alt": "{:%R - %a, %b %d %Y - w:%V}",
+        "today-format": "<span background='#bd93f9' color='#282a36'><b>{}</b></span>",
+        "calendar-weeks-pos": "left",
+        "format-calendar": "<span background='#282a36' bgalpha='60%'><b>{}</b></span>",
+        "format-calendar-weeks": "<span color='#ff79c6'><b>W{}</b></span>",
+        "format-calendar-weekdays": "<span color='#bd93f9'><b>{}</b></span>",
+        "on-click-right": "$TERMINAL_CMD --hold cal -Sn 5"
     },
     "backlight": {
         "format": "{icon} {percent}%",
@@ -52,7 +58,7 @@
             "",
             "",
             "",
-            "",
+            ""
         ]
     },
     "pulseaudio": {
@@ -82,12 +88,12 @@
         "states": {
             "warning": 75,
             "critical": 90
-        },
+        }
     },
     "cpu": {
         "interval": 5,
         "format": " {usage}%",
-        "on-click-right": "$TERMINAL_CMD btop",
+        "on-click-right": "$TERMINAL_CMD btop"
     },
     "battery": {
         "states": {
@@ -117,7 +123,7 @@
     },
     "tray": {
         "icon-size": 22,
-        "spacing": 8,
+        "spacing": 8
     },
     "network": {
         // "interface": "wlp3s0",
@@ -143,17 +149,17 @@
     },
     "custom/mpris_play_pause": {
         "format": "{icon} {}",
-        "max-length": 12,
+        "max-length": 15,
         "format-icons": {
             "Playing": "",
-            "Paused": "",
+            "Paused": ""
         },
         "return-type": "json",
         // "exec": "playerctl metadata --format '{\"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
         "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}}\", \"tooltip\": \" {{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
         "exec-if": "playerctl status",
         "on-click": "playerctl play-pause",
-        "on-click-right": "$TERMINAL_CMD ncmpcpp",
+        "on-click-right": "$TERMINAL_CMD ncmpcpp"
     },
     "custom/mpris_prev": {
         "format": "{icon}",

@@ -1,6 +1,6 @@
 * {
-  font-size: 16;
-  font-family: "JetBrains Mono, Font Awesome 6 Free";
+  font-size: 18;
+  font-family: "Noto Sans, Font Awesome 6 Free";
 }
 
 window#waybar {
@@ -45,6 +45,11 @@ window#waybar {
   padding-left: 5px;
   padding-right: 5px;
   margin-right: 3px;
+}
+
+#idle_inhibitor {
+  padding-right: 0;
+  margin-right: 0;
 }
 
 #workspaces button {
@@ -108,10 +113,10 @@ window#waybar {
 }
 
 #pulseaudio {
-    color: #8be9fd
+  color: #8be9fd;
 }
 #pulseaudio.muted {
-    color: #ff5555
+  color: #ff5555;
 }
 
 #custom-mpris_prev,

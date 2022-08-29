@@ -40,10 +40,10 @@ exec fcitx5 -dr
 exec xrdb -load ~/.Xresources
 
 # network manager applet
-exec nm-applet --indicator
+exec --no-startup-id nm-applet --indicator
 
 # bluetooth manager applet
-exec blueman-applet
+exec --no-startup-id blueman-applet
 
 # nightlight
 # exec gammastep-indicator -t 5700:3500
@@ -342,7 +342,7 @@ bindsym Ctrl+Up exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym Ctrl+Down exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 # Custom Bindings
 bindsym $mod+F11 exec goldendict
-bindsym $mod+Shift+m exec playerctl play-pause
+bindsym $mod+Shift+m exec mpc toggle
 
 #
 # Status Bar:
