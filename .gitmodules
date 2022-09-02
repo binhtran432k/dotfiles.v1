@@ -7,9 +7,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:binhtran432k/nvim.git
-[submodule "themes/dracula"]
-	path = themes/dracula
-	url = https://github.com/dracula/gtk.git
 [submodule ".antigen"]
 	path = .antigen
 	url = https://github.com/zsh-users/antigen.git

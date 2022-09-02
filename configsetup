@@ -54,33 +54,11 @@ install_scripts() {
   done
 }
 
-install_theme() {
-    theme_out=~/.local/share/themes
-    mkdir -p "$theme_out"
-    ln -snf "$src/themes/dracula" "$theme_out/Dracula"
-    icon_out=~/.local/share/icons
-    mkdir -p "$icon_out"
-    ln -snf "$src/themes/dracula/kde/cursors/Dracula-cursors" "$icon_out/Dracula-cursors"
-    kvantum_out=~/.config/Kvantum/
-    mkdir -p "$kvantum_out"
-    ln -snf "$src/themes/dracula/kde/kvantum/Dracula-purple-solid" "$kvantum_out/Dracula-purple-solid"
-}
-
-uninstall_theme() {
-    theme_out=~/.local/share/themes
-    icon_out=~/.local/share/icons
-    kvantum_out=~/.local/share/icons
-    rm -rf "$theme_out/Dracula"
-    rm -rf "$icon_out/Dracula-cursors"
-    rm -rf "$kvantum_out/Dracula-purple-solid"
-}
-
 process_install() {
   process_uninstall
   echo "Installing config..."
   install_scripts
   install_configs
-  install_theme
   echo "Install complete"
 }
 
@@ -88,7 +66,6 @@ process_uninstall() {
   echo "Uninstalling config..."
   uninstall_scripts
   uninstall_configs
-  uninstall_theme
   echo "Uninstall complete"
 }
 
