@@ -3,7 +3,7 @@
 xdg_configs=( nvim i3 sway i3status i3status-rust dunst kitty ranger
     pulseaudio-ctl polybar conky geoclue zathura dmenu-recent btop ncmpcpp mpd
     neofetch morc_menu qutebrowser picom.conf redshift.conf shalarm vimiv
-    starship.toml tbsm wezterm swaylock waybar mako gtk-3.0 goneovim )
+    starship.toml tbsm wezterm swaylock waybar mako gtk-3.0 goneovim xfce4 )
 configs=( .zshrc .zprofile .profile .gitconfig .goldendict .Xresources .dmenurc
     .dir_colors .fonts .dircolors .backgrounds .antigen .p10k.zsh )
 scripts=( brave-popup simplescrot shalarm i3lock-color i3lock-blur
