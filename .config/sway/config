@@ -22,9 +22,16 @@ set $lock swaylock
 #exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
 
 # fix GTK apps slow startup
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+set $fix_env DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec systemctl --user import-environment $fix_env
 exec hash dbus-update-activation-environment 2>/dev/null && \
-    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    dbus-update-activation-environment --systemd $fix_env
+
+# fix obs screen cast
+exec dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP=sway
+# Then stop any services that are running, so that they receive the new env var when they restart.
+exec systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+exec systemctl --user start pipewire-media-session
 
 # load gtk themes
 exec_always import-gsettings
@@ -49,7 +56,7 @@ exec --no-startup-id blueman-applet
 # exec gammastep-indicator -t 5700:3500
 set $lat 10.8326
 set $long 106.6581
-exec_always killall wlsunset && wlsunset -t 3500 -T 5900 -l $lat -L $long
+exec --no-startup-id wlsunset -t 3500 -T 5900 -l $lat -L $long
 
 # Music
 exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd & mpDris2
