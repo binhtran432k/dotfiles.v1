@@ -6,8 +6,9 @@ xdg_configs=( nvim i3 sway i3status i3status-rust dunst kitty ranger
     starship.toml tbsm wezterm swaylock waybar mako gtk-3.0 goneovim )
 configs=( .zshrc .zprofile .profile .gitconfig .goldendict .Xresources .dmenurc
     .dir_colors .fonts .dircolors .backgrounds .antigen .p10k.zsh )
-scripts=( brave-popup simplescrot shalarm i3lock-color switch_ibus_engine
-    switch_brightness my_dmenu_recency sway-prop import-gsettings )
+scripts=( brave-popup simplescrot shalarm i3lock-color i3lock-blur
+    switch_ibus_engine switch_brightness my_dmenu_recency sway-prop
+    import-gsettings )
 
 src=$(pwd)
 xdg_config_src=$src/.config
