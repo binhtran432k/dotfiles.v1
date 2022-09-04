@@ -53,17 +53,17 @@ idle_fg = "#f8f8f2"
 block = "cpu"
 interval = 1
 format = "{utilization:1}"
-on_click = "kitty --class floating -e btop"
+on_click = "$TERMINAL --class FloatingTerminal -e btop"
 
 [[block]]
 block = "backlight"
 # device = "intel_backlight"
 icons_format = "{icon}"
-format = "{brightness:1}"
+format = "{brightness:3}"
 invert_icons = true
 minimum = 15
 maximum = 100
-cycle = [100, 30, 0, 20]
+cycle = [30, 80]
 on_click = "xfce4-power-manager -c"
 [block.theme_overrides]
 idle_bg = "#44475a"
@@ -73,7 +73,7 @@ idle_fg = "#f8f8f2"
 [[block]]
 block = "battery"
 interval = 10
-format = " {percentage} {time}"
+format = "{percentage} {time}"
 full_format = " {percentage}"
 on_click = "xfce4-power-manager -c"
 
@@ -86,7 +86,7 @@ hide_when_empty = true
 smart_trim = true
 marquee_interval = 10
 max_width = 10
-on_click = "kitty --class floating -e ncmpcpp -s visualizer"
+on_click = "$TERMINAL --class FloatingTerminal -e ncmpcpp -s visualizer"
 [block.theme_overrides]
 idle_bg = "#44475a"
 idle_fg = "#f8f8f2"
@@ -100,11 +100,11 @@ headphones_indicator = true
 
 [[block]]
 block = "time"
-interval = 60
+interval = 10
 icons_format = ""
-on_click = "kitty --class floating --hold -e cal -S -n 5"
+on_click = "$TERMINAL --class FloatingTerminal --hold -e cal -S -n 5"
 # format = "%a %D/% %r"
-format = " %a, %d \uf017 %H:%M"
+format = "%a, %b %d  \uf017 %R"
 [block.theme_overrides]
 # idle_bg = "#BD93F9"
 # idle_fg = "#000000"
