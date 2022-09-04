@@ -8,12 +8,12 @@ export TERMINAL=/usr/bin/kitty
 export TERMINAL_CMD="$TERMINAL -e"
 
 # Setup ibus
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-export QT4_IM_MODULE=fcitx
-export CLUTTER_IM_MODULE=fcitx
-export GLFW_IM_MODULE=fcitx
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT4_IM_MODULE=ibus
+export CLUTTER_IM_MODULE=ibus
+export GLFW_IM_MODULE=ibus
 
 # Fix vscode trash issue
 export ELECTRON_TRASH=/usr/bin/gio
