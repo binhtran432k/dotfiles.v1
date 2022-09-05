@@ -1,20 +1,22 @@
-.PHONY: paru clean
+.PHONY: paru deps install clean
 
 deps:
 	sudo pacman -S --needed base-devel
-paru:
+install:
 	git clone https://aur.archlinux.org/paru-bin.git && \
 	cd paru-bin && \
 	makepkg -si
-install:
+paru:
 	# package manager
-	paru -S --needed git
+	paru -S --needed git npm luarocks
 	# themes
 	paru -S --needed kvantum-qt5 qt5ct lxappearance papirus-icon-theme \
-		papirus-folders
+		papirus-folders i3status-rust
 	# util
-	paru -S --needed coreutils xdg-utils neofetch btop xclip xsel dmenu \
-		redshift bat wget picom polkit polkit-gnome gnome-keyring ly
+	paru -S --needed coreutils xdg-utils neofetch btop xclip xsel \
+		redshift bat wget picom polkit polkit-gnome gnome-keyring \
+		ibus-bamboo-git zsh zsh-completions xfce4-power-manager feh \
+		lazygit zip unzip xss-lock safeeyes xprintidle
 	# audio
 	paru -S --needed pulseaudio pulseaudio-bluetooth pavucontrol
 	# network
@@ -25,7 +27,7 @@ install:
 	# terminal
 	paru -S --needed kitty rxvt-unicode
 	# browser
-	paru -S --needed brave-bin thunderbird
+	paru -S --needed brave-browser thunderbird
 	# multimedia
 	paru -S --needed zathura zathura-pdf-mupdf vlc vimiv-qt goldendict-git gimp \
 		inkscape xarchiver ranger-git
@@ -34,7 +36,7 @@ install:
 	# music
 	paru -S --needed mpc mpd mpdris2 ncmpcpp
 	# programming enviroment
-	paru -S --needed jdk8-openjdk jdk17-openjdk
+	paru -S --needed jdk8-openjdk jdk17-openjdk nodejs fennel
 clean:
 	rm -rf paru-bin
 	rm -rf dracula-gtk
