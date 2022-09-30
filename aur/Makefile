@@ -16,13 +16,14 @@ paru:
 	paru -S --needed coreutils xdg-utils neofetch btop xclip xsel \
 		redshift bat wget picom polkit polkit-gnome gnome-keyring \
 		ibus-bamboo-git zsh zsh-completions xfce4-power-manager feh \
-		lazygit zip unzip xss-lock safeeyes xprintidle
+		lazygit zip unzip xss-lock safeeyes xprintidle dragon-drop \
+		ripgrep
 	# audio
 	paru -S --needed pulseaudio pulseaudio-bluetooth pavucontrol
 	# network
 	paru -S --needed networkmanager network-manager-applet bluez bluez-utils
 	# font
-	paru -S --needed ttf-cascadia-code ttf-nerd-fonts-symbols ttf-font-awesome \
+	paru -S --needed ttf-cascadia-code ttf-nerd-fonts-symbols-2048-em ttf-font-awesome \
 		ttf-font-icons noto-fonts noto-fonts-emoji ttf-liberation
 	# terminal
 	paru -S --needed kitty rxvt-unicode
@@ -30,13 +31,14 @@ paru:
 	paru -S --needed brave-browser thunderbird
 	# multimedia
 	paru -S --needed zathura zathura-pdf-mupdf vlc vimiv-qt goldendict-git gimp \
-		inkscape xarchiver ranger-git
+		inkscape xarchiver ranger-git obs-studio
 	# editor
 	paru -S --needed neovim-nightly-bin visual-studio-code-bin
 	# music
 	paru -S --needed mpc mpd mpdris2 ncmpcpp
 	# programming enviroment
-	paru -S --needed jdk8-openjdk jdk17-openjdk nodejs fennel
+	paru -S --needed jdk8-openjdk jdk17-openjdk nodejs fennel virtualbox \
+		virtualbox-ext-oracle docker lazydocker-bin
 clean:
 	rm -rf paru-bin
 	rm -rf dracula-gtk

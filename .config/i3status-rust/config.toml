@@ -50,12 +50,6 @@ idle_bg = "#44475a"
 idle_fg = "#f8f8f2"
 
 [[block]]
-block = "cpu"
-interval = 1
-format = "{utilization:1}"
-on_click = "$TERMINAL --class FloatingTerminal -e btop"
-
-[[block]]
 block = "backlight"
 # device = "intel_backlight"
 icons_format = "{icon}"
@@ -64,11 +58,15 @@ invert_icons = true
 minimum = 15
 maximum = 100
 cycle = [30, 80]
-on_click = "xfce4-power-manager -c"
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "{utilization:1}"
+on_click = "$TERMINAL --class FloatingTerminal -e btop"
 [block.theme_overrides]
 idle_bg = "#44475a"
 idle_fg = "#f8f8f2"
-
 
 [[block]]
 block = "battery"

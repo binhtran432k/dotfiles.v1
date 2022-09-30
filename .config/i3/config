@@ -5,8 +5,8 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $border_size 5
-set $font_size 10
-set $bar_height 28
+set $font_size 11
+set $bar_height 24
 set $i3exit i3exit
 set $i3lock blurlock
 set $i3scrot simplescrot
@@ -387,7 +387,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # Ibus
 exec --no-startup-id ibus-daemon -xdr
 # exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-exec_always --no-startup-id feh --bg-scale ~/.backgrounds/sweet/pink-bridge.jpg; sleep 1; picom -b
+exec_always --no-startup-id feh --bg-scale ~/.backgrounds/sweet/fantasy-space.jpg; sleep 1; picom -b
 # exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id pamac-tray
@@ -398,7 +398,7 @@ exec xfce4-power-manager
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
 # exec --no-startup-id sleep 1 && conky -c ~/.config/conky/conky1.10_shortcuts.conf
-exec --no-startup-id sleep 0.5 && conky -c ~/.config/conky/conky.conf
+# exec --no-startup-id sleep 0.5 && conky -c ~/.config/conky/conky.conf
 exec --no-startup-id xss-lock -- $i3lock -n
 exec --no-startup-id safeeyes
 # exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent # use this for auto detect lat and long

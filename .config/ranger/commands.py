@@ -16,6 +16,10 @@ class lg(Command):
     def execute(self):
         self.fm.run('lazygit ' + self.rest(1))
 
+class ld(Command):
+    def execute(self):
+        self.fm.run('lazydocker ' + self.rest(1))
+
 class v(Command):
     def execute(self):
         self.fm.run('nvim ' + self.rest(1))
