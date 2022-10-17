@@ -6,39 +6,51 @@ install:
 	git clone https://aur.archlinux.org/paru-bin.git && \
 	cd paru-bin && \
 	makepkg -si
-paru:
-	# package manager
-	paru -S --needed git npm luarocks
+ii3:
 	# themes
-	paru -S --needed kvantum-qt5 qt5ct lxappearance papirus-icon-theme \
+	paru -S --needed qt5ct lxappearance papirus-icon-theme \
 		papirus-folders i3status-rust
 	# util
-	paru -S --needed coreutils xdg-utils neofetch btop xclip xsel \
-		redshift bat wget picom polkit polkit-gnome gnome-keyring \
-		ibus-bamboo-git zsh zsh-completions xfce4-power-manager feh \
-		lazygit zip unzip xss-lock safeeyes xprintidle dragon-drop \
-		ripgrep
+	paru -S --needed redshift picom polkit polkit-gnome gnome-keyring \
+		xfce4-power-manager feh \
+		lazygit xss-lock
 	# audio
 	paru -S --needed pulseaudio pulseaudio-bluetooth pavucontrol
 	# network
 	paru -S --needed networkmanager network-manager-applet bluez bluez-utils
+	# multimedia
+	paru -S --needed zathura zathura-pdf-mupdf vimiv-qt xarchiver
+	# music
+	paru -S --needed mpc mpd mpdris2 ncmpcpp
+icommon:
+	# boot
+	paru -S --needed plymouth plymouth-theme-manjaro
+	# util
+	paru -S --needed coreutils xdg-utils btop neofetch dragon-drop ripgrep bat \
+		wget ueberzug
+	# themes
+	paru -S --needed kvantum-qt5
+	# util
+	paru -S --needed xclip xsel zsh zsh-completions ibus-bamboo-git gnome-keyring zip unzip safeeyes xprintidle
+	# package manager
+	paru -S --needed git npm luarocks
+	# multimedia
+	paru -S --needed vlc goldendict-git gimp inkscape obs-studio ranger-git
+	# terminal
+	paru -S --needed kitty
 	# font
 	paru -S --needed ttf-cascadia-code ttf-nerd-fonts-symbols-2048-em ttf-font-awesome \
 		ttf-font-icons noto-fonts noto-fonts-emoji ttf-liberation
-	# terminal
-	paru -S --needed kitty rxvt-unicode
-	# browser
+	# software
 	paru -S --needed brave-browser thunderbird
-	# multimedia
-	paru -S --needed zathura zathura-pdf-mupdf vlc vimiv-qt goldendict-git gimp \
-		inkscape xarchiver ranger-git obs-studio
 	# editor
-	paru -S --needed neovim-nightly-bin visual-studio-code-bin
-	# music
-	paru -S --needed mpc mpd mpdris2 ncmpcpp
+	paru -S --needed visual-studio-code-bin neovim-nightly-bin
 	# programming enviroment
-	paru -S --needed jdk8-openjdk jdk17-openjdk nodejs fennel virtualbox \
-		virtualbox-ext-oracle docker lazydocker-bin
+	paru -S --needed jdk-openjdk nodejs fennel virtualbox \
+		virtualbox-ext-oracle docker dotnet-sdk
+kde:
+	paru -S --needed latte-dock-git plasma5-applets-window-appmenu-git plasma5-applets-window-title-git \
+		plasma5-applets-kpplemenu-git plasma5-applets-betterinlineclock-git plasma5-applets-latte-separator appmenu-gtk-module sweet-theme-full-git
 clean:
 	rm -rf paru-bin
 	rm -rf dracula-gtk
