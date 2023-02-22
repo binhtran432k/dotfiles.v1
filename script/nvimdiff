@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -e /bin/nvim ]]; then
+    /bin/nvim -d $@
+    exit 0
+fi
+
+exit 2

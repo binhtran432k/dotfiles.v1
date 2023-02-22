@@ -1,3 +1,5 @@
+# vim:ft=i3config:foldmethod=marker:
+
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -6,7 +8,7 @@
 set $mod Mod4
 set $border_size 5
 set $font_size 11
-set $bar_height 24
+set $bar_height 26
 set $i3exit i3exit
 set $i3lock blurlock
 set $i3scrot simplescrot
@@ -28,7 +30,7 @@ hide_edge_borders none
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
-# focus_follows_mouse no
+focus_follows_mouse no
 
 # keyboard rate
 exec_always --no-startup-id xset r rate 200 30
@@ -38,7 +40,7 @@ exec_always --no-startup-id xset r rate 200 30
 # change borders
 bindsym $mod+u border none
 bindsym $mod+y border pixel $border_size
-# bindsym $mod+n border normal
+bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -82,7 +84,6 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec brave
 bindsym $mod+F3 exec pcmanfm
-bindsym $mod+F11 exec goldendict
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -139,7 +140,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Ctrl+space focus mode_toggle
 
 # toggle sticky
 bindsym $mod+Shift+s sticky toggle
@@ -210,8 +211,8 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
-# assign [class="Pale moon"] $ws2
+assign [class="Brave"] $ws2
+assign [class="thunderbird"] $ws3
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 
@@ -251,6 +252,7 @@ for_window [class="Safeeyes"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
 for_window [class="Kvantum Manager"] floating enable
 for_window [class="Blueman-services"] floating enable
+for_window [class="kruler"] floating enable move position center
 
 # Custom all floating class be floating
 for_window [class="FloatingTerminal"] floating enable resize set 1024 760,\
@@ -261,9 +263,14 @@ for_window [class=".*"] border pixel $border_size
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
+
+for_window [floating] border normal
 # }}}
 
 # {{{ Binding System
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -354,9 +361,12 @@ set $mode_scrot scrot: (f)ull_screen, (s)elect, (w)indow
 bindsym $mod+p mode "$mode_scrot"
 
 mode "$mode_scrot" {
-    bindsym f exec --no-startup-id $i3scrot, mode "default"
+    bindsym f exec --no-startup-id $i3scrot -d, mode "default"
     bindsym w --release exec --no-startup-id $i3scrot -w, mode "default"
     bindsym s --release exec --no-startup-id $i3scrot -s, mode "default"
+    bindsym Shift+f exec --no-startup-id $i3scrot -dc, mode "default"
+    bindsym Shift+w --release exec --no-startup-id $i3scrot -wc, mode "default"
+    bindsym Shift+s --release exec --no-startup-id $i3scrot -sc, mode "default"
 
     bindsym $mod+r mode "default"
     bindsym Ctrl+bracketleft mode "default"
@@ -366,13 +376,15 @@ mode "$mode_scrot" {
 # }}}
 
 # {{{ Launcher Mode
-set $mode_launcher launch: (b)rave (t)hunderbird pamac-(m)anager
+set $mode_launcher launch: (b)rave (t)hunderbird pamac-(m)anager (g)oldendict (c)alculator
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
     bindsym b exec brave, mode "default"
     bindsym t exec thunderbird, mode "default"
     bindsym m exec pamac-manager, mode "default"
+    bindsym g exec goldendict, mode "default"
+    bindsym c exec source $HOME/.dmenurc && =, mode "default"
 
     bindsym $mod+r mode "default"
     bindsym Ctrl+bracketleft mode "default"
@@ -390,7 +402,7 @@ exec --no-startup-id ibus-daemon -xdr
 exec_always --no-startup-id feh --bg-scale ~/.backgrounds/sweet/fantasy-space.jpg; sleep 1; picom -b
 # exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
-exec --no-startup-id pamac-tray
+# exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
 exec xfce4-power-manager
@@ -533,5 +545,3 @@ bindsym XF86AudioMute exec --no-startup-id $audio_toggle
 bindsym Ctrl+Up exec --no-startup-id $audio_up
 bindsym Ctrl+Down exec --no-startup-id $audio_down
 # }}}
-
-# vim:ft=i3config:foldmethod=marker:

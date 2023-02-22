@@ -1,13 +1,12 @@
 # Setup default
-if [[ $DESKTOP_SESSION = 'plasma' ]]; then
-else
+if [[ $DESKTOP_SESSION != 'plasma' ]]; then
 	export QT_QPA_PLATFORMTHEME="qt5ct"
 	export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 	export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 fi
 
 export BROWSER=/usr/bin/brave
-export EDITOR=/usr/bin/nvim
+export EDITOR=nvim
 export TERMINAL=/usr/bin/kitty
 export TERMINAL_CMD="$TERMINAL -e"
 
@@ -31,4 +30,4 @@ export LC_COLLATE="C"
 # Neovide
 # export NEOVIDE_MULTIGRID=true
 
-ibus-daemon -drxR
+# ibus-daemon -drxR

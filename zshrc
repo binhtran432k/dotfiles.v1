@@ -1,3 +1,7 @@
+# !/bin/zsh
+# dmenu
+source "$HOME/.dmenurc"
+
 # {{{zsh-syntax-highlighting
 # Dracula Theme (for zsh-syntax-highlighting)
 #
@@ -91,6 +95,12 @@ ZSH_HIGHLIGHT_STYLES[default]='fg=#F8F8F2'
 ZSH_HIGHLIGHT_STYLES[cursor]='standout'
 # }}}
 
+# {{{ zsh style
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' lazy-cmd eslint prettier typescript
+zstyle ':omz:plugins:nvm' autoload yes
+# }}}
+
 # {{{ antigen
 source "$HOME/.antigen/antigen.zsh"
 
@@ -101,6 +111,8 @@ antigen use oh-my-zsh
 antigen theme romkatv/powerlevel10k
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle dotnet
+antigen bundle nvm
 antigen bundle git
 antigen bundle pip
 antigen bundle command-not-found
@@ -161,6 +173,7 @@ extend_env()
 
 # {{{ Enviroments
 extend_env PATH "$HOME/.luarocks/bin"
+extend_env PATH "$HOME/.local/share/bob/nvim-bin"
 # }}}
 
 # {{{ Useful Functions
@@ -217,4 +230,10 @@ alias paru-devel="pacman -Qmq | grep -Ee '-(cvs|svn|git|hg|bzr|darcs|nightly-bin
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # }}}
 
-# vim:foldmethod=marker
+# load auto completion
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true

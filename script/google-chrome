@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+if [[ -f /usr/bin/google-chrome-stable ]]; then
+    /usr/bin/google-chrome-stable $@
+    exit 0
+fi
+
+exit 2

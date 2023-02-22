@@ -1,7 +1,0 @@
-[user]
-	email = binhtran432k@gmail.com
-	name = Tran Duc Binh
-[merge]
-	tool = nvimdiff
-[mergetool "nvimdiff"]
-	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'

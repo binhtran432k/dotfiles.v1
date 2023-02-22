@@ -26,3 +26,9 @@ Clean with:
 ```
 sudo make cleannobeep
 ```
+
+## Natural Scrolling
+for touchpad search `libinput touchpad catchall`
+goto `/usr/share/X11/xorg.conf.d/40-libinput.conf`
+
+Option "NaturalScrolling" "True"

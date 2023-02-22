@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
+   font = wezterm.font('Victor Mono'),
    color_scheme = "Dracula",
    font_size = 12,
    window_background_opacity = 0.9,

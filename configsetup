@@ -1,76 +1,95 @@
 #!/bin/bash
 
-xdg_configs=( nvim i3 sway i3status i3status-rust dunst kitty ranger
-    pulseaudio-ctl polybar conky geoclue zathura dmenu-recent btop ncmpcpp mpd
-    neofetch morc_menu qutebrowser picom.conf redshift.conf shalarm vimiv
-    starship.toml tbsm wezterm swaylock waybar mako gtk-3.0 goneovim xfce4
-    paru safeeyes )
-configs=( .zshrc .zprofile .profile .gitconfig .goldendict .Xresources .dmenurc
-    .dir_colors .fonts .dircolors .backgrounds .antigen .p10k.zsh )
-scripts=( brave-popup simplescrot shalarm i3lock-color i3lock-blur
-    switch_ibus_engine switch_brightness my_dmenu_recency sway-prop
-    import-gsettings )
-
 src=$(pwd)
-xdg_config_src=$src/.config
-config_src=$src
-script_src=$src/script
+out=~
 
-xdg_config_out=~/.config
-config_out=~
-script_out=~/.local/bin
+config_src=config
+script_src=script
+config=.config
+script=.local/bin
 
-uninstall_configs() {
-  for i in ${configs[@]}; do
-    rm -rf "$config_out/$i"
-  done
+type=0
 
-  for i in ${xdg_configs[@]}; do
-    rm -rf "$xdg_config_out/$i"
-  done
+do_action() {
+  if [[ "$type" = "install" ]]; then
+    eval "ln -snf \"$src/$1\" \"$out/$2\""
+  elif  [[ "$type" = "uninstall" ]]; then
+    eval "rm -rf \"$out/$2\""
+  elif  [[ "$type" = "execute" ]]; then
+    eval "chmod +x \"$out/$2\""
+  fi
 }
 
-uninstall_scripts() {
-  for i in ${scripts[@]}; do
-    rm -rf "$script_out/$i"
-  done
+process() {
+  do_action zshrc .zshrc
+  do_action zprofile .zprofile
+  do_action profile .profile
+  do_action gitconfig .gitconfig
+  do_action goldendict .goldendict
+  do_action Xresources .Xresources
+  do_action dmenurc .dmenurc
+  do_action dir_colors .dir_colors
+  do_action fonts .fonts
+  do_action dircolors .dircolors
+  do_action backgrounds .backgrounds
+  do_action .antigen .antigen
+  do_action p10k.zsh .p10k.zsh
 }
 
-install_configs() {
-  for i in ${configs[@]}; do
-    ln -snf "$config_src/$i" "$config_out/$i"
-  done
-
-  mkdir -p "$xdg_config_out/"
-  for i in ${xdg_configs[@]}; do
-    ln -snf "$xdg_config_src/$i" "$xdg_config_out/$i"
-  done
+process_xdg() {
+  do_action $config_src/nvim $config/nvim
+  do_action $config_src/i3 $config/i3
+  do_action $config_src/sway $config/sway
+  do_action $config_src/i3status $config/i3status
+  do_action $config_src/i3status-rust $config/i3status-rust
+  do_action $config_src/dunst $config/dunst
+  do_action $config_src/kitty $config/kitty
+  do_action $config_src/ranger $config/ranger
+  do_action $config_src/pulseaudio-ctl $config/pulseaudio-ctl
+  do_action $config_src/polybar $config/polybar
+  do_action $config_src/conky $config/conky
+  do_action $config_src/geoclue $config/geoclue
+  do_action $config_src/zathura $config/zathura
+  do_action $config_src/dmenu-recent $config/dmenu-recent
+  do_action $config_src/btop $config/btop
+  do_action $config_src/ncmpcpp $config/ncmpcpp
+  do_action $config_src/mpd $config/mpd
+  do_action $config_src/neofetch $config/neofetch
+  do_action $config_src/morc_menu $config/morc_menu
+  do_action $config_src/qutebrowser $config/qutebrowser
+  do_action $config_src/picom.conf $config/picom.conf
+  do_action $config_src/redshift.conf $config/redshift.conf
+  do_action $config_src/shalarm $config/shalarm
+  do_action $config_src/vimiv $config/vimiv
+  do_action $config_src/starship.toml $config/starship.toml
+  do_action $config_src/tbsm $config/tbsm
+  do_action $config_src/wezterm $config/wezterm
+  do_action $config_src/swaylock $config/swaylock
+  do_action $config_src/waybar $config/waybar
+  do_action $config_src/mako $config/mako
+  do_action $config_src/gtk-3.0 $config/gtk-3.0
+  do_action $config_src/goneovim $config/goneovim
+  do_action $config_src/xfce4 $config/xfce4
+  do_action $config_src/paru $config/paru
+  do_action $config_src/safeeyes $config/safeeyes
 }
 
-install_scripts() {
-  mkdir -p "$script_out/"
-  for i in ${scripts[@]}; do
-    chmod +x "$script_src/$i"
-    ln -snf "$script_src/$i" "$script_out/$i"
-  done
+process_script() {
+  do_action $script_src/brave-popup $script/brave-popup
+  do_action $script_src/simplescrot $script/simplescrot
+  do_action $script_src/shalarm $script/shalarm
+  do_action $script_src/i3lock-color $script/i3lock-color
+  do_action $script_src/i3lock-blur $script/i3lock-blur
+  do_action $script_src/switch_ibus_engine $script/switch_ibus_engine
+  do_action $script_src/switch_brightness $script/switch_brightness
+  do_action $script_src/my_dmenu_recency $script/my_dmenu_recency
+  do_action $script_src/sway-prop $script/sway-prop
+  do_action $script_src/import-gsettings $script/import-gsettings
+  do_action $script_src/nvimdiff $script/nvimdiff
+  do_action $script_src/google-chrome $script/google-chrome
 }
 
-process_install() {
-  process_uninstall
-  echo "Installing config..."
-  install_scripts
-  install_configs
-  echo "Install complete"
-}
-
-process_uninstall() {
-  echo "Uninstalling config..."
-  uninstall_scripts
-  uninstall_configs
-  echo "Uninstall complete"
-}
-
-process_help() {
+print_help() {
   echo "A script to setup config."
   echo
   echo "Syntax: configsetup [-i|u|h]"
@@ -78,24 +97,37 @@ process_help() {
   echo "i     Install config."
   echo "u     Uninstall config."
   echo "h     Print this Help."
+  echo "x     Make scripts excutable."
   echo
 }
 
 if [[ "$#" -eq 0 ]]; then
-  process_help
+  print_help
   exit 0
 fi
 
-while getopts ":hiu" option; do
+while getopts ":hiux" option; do
   case $option in
     h) # display HELP
-      process_help
+      print_help
       exit 0;;
     i) # install config
-      process_install
+      # process_install
+      type=install
+      process
+      process_xdg
+      process_script
       exit 0;;
     u) # uninstall config
-      process_uninstall
+      # process_uninstall
+      type=uninstall
+      process
+      process_xdg
+      process_script
+      exit 0;;
+    x) # uninstall config
+      type=execute
+      process_script
       exit 0;;
     \?) # invalid option
       echo "Error: Invalid option"

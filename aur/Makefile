@@ -1,12 +1,13 @@
 .PHONY: paru deps install clean
 
 deps:
-	sudo pacman -S --needed base-devel
+	sudo pacman -Syu && sudo pacman -S --needed base-devel
 install:
+	rm -rf paru-bin
 	git clone https://aur.archlinux.org/paru-bin.git && \
 	cd paru-bin && \
 	makepkg -si
-ii3:
+ii3: icommon
 	# themes
 	paru -S --needed qt5ct lxappearance papirus-icon-theme \
 		papirus-folders i3status-rust
@@ -27,7 +28,7 @@ icommon:
 	paru -S --needed plymouth plymouth-theme-manjaro
 	# util
 	paru -S --needed coreutils xdg-utils btop neofetch dragon-drop ripgrep bat \
-		wget ueberzug
+		wget ueberzug cloudflare-warp-bin
 	# themes
 	paru -S --needed kvantum-qt5
 	# util
