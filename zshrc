@@ -173,7 +173,6 @@ extend_env()
 
 # {{{ Enviroments
 extend_env PATH "$HOME/.luarocks/bin"
-extend_env PATH "$HOME/.local/share/bob/nvim-bin"
 # }}}
 
 # {{{ Useful Functions

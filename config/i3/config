@@ -213,6 +213,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Open applications on specific workspaces
 assign [class="Brave"] $ws2
 assign [class="thunderbird"] $ws3
+assign [class="obs"] $ws4
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 
