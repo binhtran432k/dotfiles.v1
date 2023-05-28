@@ -34,6 +34,7 @@ process() {
   do_action backgrounds .backgrounds
   do_action .antigen .antigen
   do_action p10k.zsh .p10k.zsh
+  do_action ripgreprc .ripgreprc
 }
 
 process_xdg() {
