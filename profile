@@ -1,3 +1,4 @@
+# vim:set ft=bash:
 # Setup default
 if [[ $DESKTOP_SESSION != 'plasma' ]]; then
 	export QT_QPA_PLATFORMTHEME="qt5ct"
