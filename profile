@@ -31,4 +31,4 @@ export LC_COLLATE="C"
 # Neovide
 # export NEOVIDE_MULTIGRID=true
 
-# ibus-daemon -drxR
+ibus-daemon -drx
