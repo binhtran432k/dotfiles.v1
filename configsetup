@@ -72,6 +72,7 @@ process_xdg() {
   do_action $config_src/xfce4 $config/xfce4
   do_action $config_src/paru $config/paru
   do_action $config_src/safeeyes $config/safeeyes
+  do_action $config_src/zsh $config/zsh
 }
 
 process_script() {
