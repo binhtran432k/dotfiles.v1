@@ -20,6 +20,7 @@ source "$zsh_config/alias.sh"
 
 # {{{ Enviroments
 extend_env PATH "$HOME/.luarocks/bin"
+extend_env PATH "$HOME/.cargo/bin"
 # }}}
 
 # {{{ Theme
