@@ -2,7 +2,7 @@
 r() {
     temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
     echo -n -e "\033]0;ranger\007"
-    /usr/bin/ranger --choosedir="$temp_file" "${@:-$PWD}"
+    ranger --choosedir="$temp_file" "${@:-$PWD}"
     if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
         cd -- "$chosen_dir"
     fi
