@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 return {
    font = wezterm.font({
-      family = 'Cascadia Code',
+      family = 'Maple Mono',
       harfbuzz_features = { 'calt', 'ss01' },
    }),
    color_scheme = "Dracula",
@@ -11,4 +11,14 @@ return {
    hide_tab_bar_if_only_one_tab = true,
    enable_wayland = true,
    warn_about_missing_glyphs = false,
+   unix_domains = {
+     {
+       name = 'unix',
+     },
+   },
+   -- This causes `wezterm` to act as though it was started as
+   -- `wezterm connect unix` by default, connecting to the unix
+   -- domain on startup.
+   -- If you prefer to connect manually, leave out this line.
+   default_gui_startup_args = { 'connect', 'unix' }
 }
